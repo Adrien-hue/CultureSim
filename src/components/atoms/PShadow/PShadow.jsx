@@ -4,7 +4,7 @@ const PShadow = ({content, ...props}) => {
 
     let compClass = "PShadow";
 
-    if(props.type !== undefined && props.type == "question"){
+    if(props.type !== undefined && props.type === "question"){
         compClass += " PShadow--title";
     }
 
