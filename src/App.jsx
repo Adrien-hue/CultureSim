@@ -1,4 +1,5 @@
-import logo from './logo.svg';
+import logo_capire from './assets/CAPIRE_logo.jpg';
+import logo_ue from './assets/EU.jpg';
 import './App.scss';
 
 import arCase_story from "./data.json";
@@ -11,19 +12,28 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>This is CultureSim!</h1>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div className='headerPresentation'>
+          <div className="brandContainer">
+            <img class="item headerItemImg1" src={logo_capire} alt="logo_capire" title="Accueil" />
+
+            <div className="brandInfos">
+              <h1 className='item brandName'>CAPIRE</h1>
+
+              <p className='item'>Understanding other cultures</p>
+            </div>
+          </div>
+          
+          <img class="item headerItemImg2" src={logo_ue}/>
+        </div>
+        
+        
+        <nav className='navHeader'>
+          <div className='navItem itemLink1'>
+            <a href='#'>EN</a>, <a href='#'>PL</a>, <a href='#'>FR</a>, <a href='#'>NL</a>, <a href='#'>IT</a>, <a href='#'>DE</a>
+          </div>
+
+          <a className='navItem itemLink2' href='#'>Login</a>
+        </nav>
       </header>
 
 			<main>
