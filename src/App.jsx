@@ -3,7 +3,9 @@ import './App.scss';
 
 import arCase_story from "./data.json";
 
-import { CountryCard, PShadow, PTitle } from './components/atoms';
+import { CountryCard } from './components/atoms';
+
+import { CaseStory } from './containers';
 
 function App() {
   return (
@@ -31,15 +33,8 @@ function App() {
 				<CountryCard name="Pays-bas" image="countryCard_nederland.jpg"/> 
 				<CountryCard name="Pologne" image="countryCard_poland.jpg"/>
 
-        {arCase_story.map( (data) => {
-          return <div key={`case_story` + data.id}>
-            <PShadow content={data.context} key={`context` + data.id} />
-            <PShadow content={data.question} type="question" key={`question` + data.id} />
-            <PTitle title="Answer A" content={data.answerA.interpretation} />
-            <PTitle title="Answer B" content={data.answerB.interpretation} />
-            <PTitle title="Answer C" content={data.answerC.interpretation} />
-            <PTitle title="Answer D" content={data.answerD.interpretation} />
-          </div>
+        {arCase_story.map((data) => {
+          return <CaseStory caseStory={data}/>
         })}
 
 			</main>
