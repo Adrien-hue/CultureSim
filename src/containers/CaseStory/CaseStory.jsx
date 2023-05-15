@@ -1,26 +1,27 @@
 import "./CaseStory.scss";
 
-import { PShadow, PTitle } from "../../components/atoms";
+import { PShadow } from "../../components/atoms";
+import { CS_Interpretation } from "../../components/molecules";
 
 const CaseStory = ({caseStory, ...props}) => {
+    const alphabet = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
+    
+    let id = caseStory.id;
+
     let context = caseStory.context;
     let question = caseStory.question;
 
-    let answerA = caseStory.answerA.interpretation;
-    let answerB = caseStory.answerB.interpretation;
-    let answerC = caseStory.answerC.interpretation;
-    let answerD = caseStory.answerD.interpretation;
+    let arAnswers = caseStory.answers;
 
     return <div className="CaseStory-container">
         <div className="CaseStory-statement">
-            <PShadow content={context}/>
-            <PShadow content={question} type= "question"/>
+            <PShadow content={context} key={`context` + id}/>
+            <PShadow content={question} type= "question" key={`question` + id}/>
         </div>
         <div className="CaseStory-interpretations">
-            <PTitle content={answerA} title="Answer A"/>
-            <PTitle content={answerB} title="Answer B"/>
-            <PTitle content={answerC} title="Answer C"/>
-            <PTitle content={answerD} title="Answer D"/>
+            {arAnswers.map((el, i) => {
+                return <CS_Interpretation content={el.interpretation} title={`Answer ` + alphabet[i]} isTrue={el.isTrue} key={`answer` + alphabet[i] + id}/>
+            })}
         </div>
         
     </div>

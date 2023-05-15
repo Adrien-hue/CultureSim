@@ -1,0 +1,13 @@
+@import "../../../styles/_variables.scss";
+
+.CS_interpretation {
+    padding: 0;
+
+    border: none;
+
+    background-color: transparent;
+
+    :hover {
+        cursor: pointer;
+    }
+}

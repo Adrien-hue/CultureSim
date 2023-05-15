@@ -14,7 +14,7 @@ function App() {
       <header className="App-header">
         <div className='headerPresentation'>
           <div className="brandContainer">
-            <img class="item headerItemImg1" src={logo_capire} alt="logo_capire" title="Accueil" />
+            <img className="item headerImg" src={logo_capire} alt="logo_capire" title="Accueil" />
 
             <div className="brandInfos">
               <h1 className='item brandName'>CAPIRE</h1>
@@ -23,16 +23,16 @@ function App() {
             </div>
           </div>
           
-          <img class="item headerItemImg2" src={logo_ue}/>
+          <img className="item headerImg" src={logo_ue}/>
         </div>
         
         
         <nav className='navHeader'>
-          <div className='navItem itemLink1'>
+          <div className='navItem'>
             <a href='#'>EN</a>, <a href='#'>PL</a>, <a href='#'>FR</a>, <a href='#'>NL</a>, <a href='#'>IT</a>, <a href='#'>DE</a>
           </div>
 
-          <a className='navItem itemLink2' href='#'>Login</a>
+          <a className='navItem' href='#'>Login</a>
         </nav>
       </header>
 
@@ -44,7 +44,7 @@ function App() {
 				<CountryCard name="Pologne" image="countryCard_poland.jpg"/>
 
         {arCase_story.map((data) => {
-          return <CaseStory caseStory={data}/>
+          return <CaseStory caseStory={data} key={`caseStory` + data.id}/>
         })}
 
 			</main>
