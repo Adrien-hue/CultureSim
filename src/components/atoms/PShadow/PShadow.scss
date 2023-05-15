@@ -1,0 +1,26 @@
+@import "../../../styles/_variables.scss";
+
+.PShadow {
+    width: 90%;
+    height: auto;
+    padding: $default_padding;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    
+    background-color: $mandarin;
+
+    box-shadow: 20px 20px $flesh;
+
+    .PShadow-p {
+        color: #FFFFFF;
+        text-align: justify;
+    }
+}
+
+.PShadow--title {
+    padding: 55px $default_padding;
+
+    .PShadow-p {
+        font-size: 32px;
+    }
+}

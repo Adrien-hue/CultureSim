@@ -1,0 +1,30 @@
+@import "../../../styles/_variables.scss";
+
+.PTitle {
+    width: 100%;
+
+    .PTitle-title {
+        position: relative;
+        z-index: 1;
+
+        min-width: 200px;
+        width: fit-content;
+        padding: $default_padding;
+        margin-left: 10px;
+
+        color: #FFFFFF;
+        font-weight: bold;
+        text-align: center;
+
+        background-color: $mandarin;
+    }
+
+    .PTitle-p {
+        padding: $default_padding;
+        margin-top: -10px;
+
+        text-align: justify;
+
+        background-color: $flesh;
+    }
+}

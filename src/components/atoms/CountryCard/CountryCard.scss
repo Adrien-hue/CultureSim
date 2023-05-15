@@ -1,0 +1,32 @@
+@import "../../../styles/_variables.scss";
+
+.countryCard {
+    width: 200px;
+    height: 170px;
+
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    border: 2px solid $mandarin;
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    .countryCard-title {
+        width: fit-content;
+        padding: 8px 4px;
+
+        font-weight: bold;
+    }
+
+    .countryCard-image {
+        width: 200px;
+        height: auto;
+        overflow: hidden;
+    }
+}
