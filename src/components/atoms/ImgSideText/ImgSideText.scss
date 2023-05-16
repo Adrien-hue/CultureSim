@@ -1,0 +1,28 @@
+.imgSideText-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    
+    .imgSideText-img {
+        max-width: 48%;
+    }
+
+    .imgSideText-p {
+        max-width: 48%;
+        height: fit-content;
+
+        text-align: justify;
+    }
+
+    .left-element {
+        order: 1;
+    }
+
+    .right-element {
+        order: 2;
+    }
+}
