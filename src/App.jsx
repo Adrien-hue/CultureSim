@@ -23,7 +23,7 @@ function App() {
             </div>
           </div>
           
-          <img className="item headerImg" src={logo_ue}/>
+          <img className="item headerImg" src={logo_ue} alt="logo_europe_union"/>
         </div>
         
         
