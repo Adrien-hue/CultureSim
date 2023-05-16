@@ -69,6 +69,8 @@
     }
   }
 
+  
+
   .navHeader{
     display: flex;
     justify-content: space-between;
@@ -87,7 +89,52 @@
     
   }
 }
+.App-footer{
 
+    width: 100%;
+    height: 350px;
+    
+    background-color: $ginger;
+
+    .footerPresentation{
+      display: flex;
+      
+      align-items: center;
+      justify-content: space-around;
+  
+      
+  
+      font-size: 18px;
+
+      .Item{
+        padding: 25px 70px 100px 10px;
+
+        display: grid;
+        grid-gap: 1.5rem;  
+        
+      }
+
+      
+      
+      a:hover, a:link, a:visited, a:active{
+        color: black;
+        font-weight: 500;
+      }
+
+      a:link, a:visited{
+        text-decoration: none;
+      }
+
+      a:hover, a:active{
+        text-decoration: underline;
+      }
+      
+    }
+    
+      
+    
+
+  }
 .App-link {
   color: #61dafb;
 }
