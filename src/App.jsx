@@ -1,12 +1,21 @@
+import React from 'react';
+import { ReactDOM } from 'react';
+
 import logo_capire from './assets/CAPIRE_logo.jpg';
 import logo_ue from './assets/EU.jpg';
+import countryCard_dutch from './assets/countryCard_dutch.jpg';
+import countryCard_france from './assets/countryCard_france.jpg';
+
 import './App.scss';
 
 import arCase_story from "./data.json";
+import arCaseStory_Home from "./data_CasestoryHome.js";
 
 import { CountryCard } from './components/atoms';
-import {Login} from './containers/Login';
-import { CaseStory } from './containers/CaseStory';
+
+import { CaseStory, CaseStory_Home, Login } from './containers';
+
+
 
 function App() {
   return (
@@ -47,6 +56,16 @@ function App() {
         {arCase_story.map((data) => {
           return <CaseStory caseStory={data} key={`caseStory` + data.id}/>
         })}
+
+        <section>
+        
+        {arCaseStory_Home.map((data) => {
+          return <CaseStory_Home caseStory_Home={data} />
+        })}
+        
+        </section>
+
+
 
 			</main>
 
