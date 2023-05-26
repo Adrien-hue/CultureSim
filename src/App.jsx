@@ -5,8 +5,8 @@ import './App.scss';
 import arCase_story from "./data.json";
 
 import { CountryCard } from './components/atoms';
-
-import { CaseStory } from './containers';
+import {Login} from './containers/Login';
+import { CaseStory } from './containers/CaseStory';
 
 function App() {
   return (
@@ -37,6 +37,7 @@ function App() {
       </header>
 
 			<main>
+        <Login/>
 				<CountryCard name="France" image="countryCard_france.jpg"/> 
 				<CountryCard name="Allemagne" image="countryCard_dutch.jpg"/> 
 				<CountryCard name="Italie" image="countryCard_italia.jpg"/> 
