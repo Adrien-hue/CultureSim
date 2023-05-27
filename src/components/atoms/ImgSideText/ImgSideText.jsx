@@ -18,7 +18,7 @@ const ImgSideText = ({text, img, img_side, ...props}) => {
     return <div className="imgSideText-container">
         <img src={img} alt="Here is the alt" className={img_className}/>
 
-        <p className={p_className}>{text}</p>
+        <div className={p_className}>{text}</div>
     </div>
 }
 
