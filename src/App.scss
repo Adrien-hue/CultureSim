@@ -8,6 +8,11 @@
   padding: 0;
 }
 
+a:link, a:visited{
+  text-decoration: none;
+  color: currentColor;
+}
+
 .App {
   text-align: center;
 }
@@ -117,10 +122,6 @@
         font-weight: 500;
       }
 
-      a:link, a:visited{
-        text-decoration: none;
-      }
-
       a:hover, a:active{
         text-decoration: underline;
       }
@@ -144,7 +145,7 @@
   }
 }
 
-.external_link {
+.external_link,  .external_link:link, .external_link:visited{
   padding: 10px;
 
   color: white;

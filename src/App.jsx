@@ -6,7 +6,7 @@ import logo_ue from './assets/EU.jpg';
 
 import './App.scss';
 
-import { Home } from './containers';
+import { CaseStory_Home, Home } from './containers';
 
 function App() {
   return (
@@ -39,6 +39,7 @@ function App() {
 			<main className='mv-3 ph-3'>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='quiz/:country' element={<CaseStory_Home />} />
         </Routes>
 			</main>
 

@@ -1,10 +1,11 @@
 
 
 import "./CaseStory_Home.scss";
-import "../../assets/countryCard_france.jpg"
 
 import { ImgSideText } from "../../components/atoms"; 
+import { useParams } from "react-router-dom";
 
+import arCaseStory_Home from "../../data_CaseStory_Home.json";
 
     const Login = () => {
         alert("you want to login ");
@@ -16,13 +17,18 @@ import { ImgSideText } from "../../components/atoms";
 
 
 
-const CaseStory_Home = ({caseStory_Home, ...props}) =>{
+const CaseStory_Home = () => {
 
-    let id = caseStory_Home.id;
-    let picture = caseStory_Home.img;
-    let name = caseStory_Home.name;
-    let text = caseStory_Home.text;
-    let pictureSide ="left";
+    let params_country_name = useParams().country;
+    
+    let data_country = arCaseStory_Home.find( el => el.name === params_country_name);
+
+    let id = data_country.id;
+    let picture = data_country.img;
+    let name = data_country.name;
+    let text = data_country.text;
+    
+    const pictureSide = "left";
 
     return <div className="CaseStoryHome-container">
 

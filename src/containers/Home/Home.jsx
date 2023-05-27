@@ -1,7 +1,11 @@
 import "./Home.scss";
+
 import { CountryCard, ImgSideText } from "../../components/atoms";
-import img_home from "../../assets/home_tmp.jpg";
+import { Link as RouterLink, useResolvedPath, useMatch } from "react-router-dom";
+
+
 import banner_home from "../../assets/banner_tmp.jpg";
+import arCaseStory_Home from "../../data_CaseStory_Home.json";
 
 const Home = () => {
     const home_text = <div>
@@ -19,18 +23,18 @@ const Home = () => {
     </div>
 
     return <div>
-        <ImgSideText text={home_text} img={img_home} img_side="left"/>
+        <ImgSideText text={home_text} img="home_tmp.jpg" img_side="left"/>
 
         <img src={banner_home} alt="banner_home" className="mv-3" style={{width: 100 + '%'}}/>
 
         <h2 className="mv-2">Countries</h2>
 
         <div className="flex flex_space-ard mv-2">
-            <CountryCard name="France" image="countryCard_france.jpg"/> 
-            <CountryCard name="Allemagne" image="countryCard_dutch.jpg"/> 
-            <CountryCard name="Italie" image="countryCard_italia.jpg"/> 
-            <CountryCard name="Pays-bas" image="countryCard_nederland.jpg"/> 
-            <CountryCard name="Pologne" image="countryCard_poland.jpg"/>
+            {arCaseStory_Home.map((el) => {
+                return <RouterLink to={`quiz/` + el.name} key={`cardLink_` + el.name}>
+                    <CountryCard name={el.name} image={el.img} />
+                </RouterLink>
+            })}
         </div>
     </div>
 }

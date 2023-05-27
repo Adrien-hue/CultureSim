@@ -13,7 +13,11 @@ const ImgSideText = ({text, img, img_side, ...props}) => {
     }
 
     return <div className="imgSideText-container">
-        <img src={img} alt="Here is the alt" className={img_className}/>
+        <img 
+            src={require(`../../../assets/` + img)}
+            alt="Here is the alt" 
+            className={img_className}
+        />
 
         <div className={p_className}>{text}</div>
     </div>
