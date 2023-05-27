@@ -1,12 +1,12 @@
+import { Routes, Route } from 'react-router-dom';
+
 import logo_capire from './assets/CAPIRE_logo.jpg';
 import logo_ue from './assets/EU.jpg';
 import './App.scss';
 
 import arCase_story from "./data.json";
 
-import { CountryCard } from './components/atoms';
-
-import { CaseStory } from './containers';
+import { CaseStory, Home } from './containers';
 
 function App() {
   return (
@@ -36,17 +36,10 @@ function App() {
         </nav>
       </header>
 
-			<main>
-				<CountryCard name="France" image="countryCard_france.jpg"/> 
-				<CountryCard name="Allemagne" image="countryCard_dutch.jpg"/> 
-				<CountryCard name="Italie" image="countryCard_italia.jpg"/> 
-				<CountryCard name="Pays-bas" image="countryCard_nederland.jpg"/> 
-				<CountryCard name="Pologne" image="countryCard_poland.jpg"/>
-
-        {arCase_story.map((data) => {
-          return <CaseStory caseStory={data} key={`caseStory` + data.id}/>
-        })}
-
+			<main className='mv-3 ph-3'>
+        <Routes>
+          <Route path='/' element={<Home />} />
+        </Routes>
 			</main>
 
       <footer className='App-footer'>
