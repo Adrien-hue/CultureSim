@@ -1,18 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
 import React from 'react';
-import { ReactDOM } from 'react';
 
 import logo_capire from './assets/CAPIRE_logo.jpg';
 import logo_ue from './assets/EU.jpg';
-import countryCard_dutch from './assets/countryCard_dutch.jpg';
-import countryCard_france from './assets/countryCard_france.jpg';
 
 import './App.scss';
 
-import arCase_story from "./data.json";
-import arCaseStory_Home from "./data_CasestoryHome.js";
-
-import { CaseStory, Home } from './containers';
+import { Home } from './containers';
 
 function App() {
   return (
