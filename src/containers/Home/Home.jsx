@@ -1,7 +1,7 @@
 import "./Home.scss";
 
 import { CountryCard, ImgSideText } from "../../components/atoms";
-import { Link as RouterLink, useResolvedPath, useMatch } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 
 import banner_home from "../../assets/banner_tmp.jpg";
