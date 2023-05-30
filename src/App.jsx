@@ -13,7 +13,7 @@ import arCaseStory_Home from "./data_CasestoryHome.js";
 
 import { CountryCard } from './components/atoms';
 
-import { CaseStory, CaseStory_Home, Login } from './containers';
+import { CaseStory, CaseStory_Home, Login, Sign_up } from './containers';
 
 
 
@@ -47,6 +47,7 @@ function App() {
 
 			<main>
         <Login/>
+        <Sign_up/>
 				<CountryCard name="France" image="countryCard_france.jpg"/> 
 				<CountryCard name="Allemagne" image="countryCard_dutch.jpg"/> 
 				<CountryCard name="Italie" image="countryCard_italia.jpg"/> 

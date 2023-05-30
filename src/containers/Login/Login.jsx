@@ -9,9 +9,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 function Login() {
   
   const schema = yup.object().shape({
-    username: yup.string().required('Champs vide, veuillez entrer votre username'),
-    email: yup.string().email('Veuillez entrer une adresse e-mail valide').required('Veuillez entrer une adresse mail valide'),
-    password: yup.string().min(5).max(12).required('Veuillez entrer un mot de passe compris entre 5 et 12 caractères')
+    username: yup.string().required('Field void, please enter your username'),
+    password: yup.string().min(5, 'Please enter a password beetween 5 and 12 character').max(12, 'Please enter a password beetween 5 and 12 character').required()
   });
   
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -40,7 +39,7 @@ function Login() {
             
            
           <div >
-                <div className='lmj-Login-read'><p>Veuillez entrer votre nom d'utilisateur:</p></div>
+                <div className='lmj-Login-read'><p>Username / e-mail:</p></div>
                     <input className="form-input"
                     type="text" 
                     name="username"
@@ -50,23 +49,11 @@ function Login() {
                     {errors.username && <div className="error-message">{errors.username.message}</div>}
                     
           </div>
-            <div>
-                <div className="lmj-Login-read"> <p>Veuillez entrer votre adresse mail :</p></div> 
-                    <input className="form-input"
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                     {...register("email")}
-				    
-                    />
-                    
-                    {errors.email && <div className="error-message">{errors.email.message}</div>}
-
-            </div>
+           
               <div>
-                    <div className="lmj-Login-read"> <p>Veuillez entrer votre mot de passe :</p></div> 
+                    <div className="lmj-Login-read"> <p>Password :</p></div> 
                         <input className="form-input"
-                        type="text" 
+                        type="password" 
                         name="password"
                         placeholder="Password"
                         { ...register("password")}
@@ -96,7 +83,7 @@ function Login() {
                             id="submit"
                             >Sign up</button>
                             </div>
-              
+                    <div className="clear"></div>
                 </div>
                  
             </div>
