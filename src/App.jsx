@@ -1,5 +1,4 @@
-import React from 'react';
-import { ReactDOM } from 'react';
+
 
 import logo_capire from './assets/CAPIRE_logo.jpg';
 import logo_ue from './assets/EU.jpg';
