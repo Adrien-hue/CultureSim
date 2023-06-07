@@ -13,8 +13,13 @@ import arCaseStory_Home from "./data_CasestoryHome.js";
 
 import { CountryCard } from './components/atoms';
 
-import { CaseStory, CaseStory_Home, Login, Sign_up } from './containers';
 
+import { Edit_Country } from './containers/Edit_Country';
+import { Edit_CaseStory } from './containers/Edit_CaseStory';
+import{ CaseStory} from './containers';
+import {Login} from './containers';
+import {Sign_up} from './containers';
+import {CaseStory_Home} from './containers'
 
 
 function App() {
@@ -48,6 +53,8 @@ function App() {
 			<main>
         <Login/>
         <Sign_up/>
+        <Edit_CaseStory/>
+        <Edit_Country/>
 				<CountryCard name="France" image="countryCard_france.jpg"/> 
 				<CountryCard name="Allemagne" image="countryCard_dutch.jpg"/> 
 				<CountryCard name="Italie" image="countryCard_italia.jpg"/> 
