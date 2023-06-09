@@ -1,0 +1,71 @@
+@import "/src/styles/mixins";
+@import "/src/styles/variables";
+@import url('https://fonts.googleapis.com/css2?family=Capriola&family=DM+Sans:wght@500&display=swap&family=Open+Sans:wght@300&display=swap');
+
+.PageNotFound-container{
+    h1{
+        font-family: 'DM sans', sans-serif;
+        font-weight: 600;
+        font-size: 180px;
+        letter-spacing: 30px;
+        background-image: linear-gradient(to bottom, $mandarin, white);
+        -webkit-background-clip: text;
+        color: transparent;
+        margin-top: -60px;
+
+    }
+
+    h2{
+        font-family: 'Capriola', sans-serif;
+        color: gray;
+        font-weight: 600;
+    }
+
+    p{
+        font-size:18px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        color: rgb(64, 64, 64);
+    }
+
+    img{
+        margin-top: -220px;
+        margin-bottom: -75px;
+    }
+
+    button{
+        padding:15px;
+        background-color: $mandarin;
+        text-align: center;
+        border: none;
+        border-radius: 10px;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        span{
+            font-family: 'Capriola', sans-serif;
+            color: white;
+            font-size: larger;   
+        }
+    }
+
+    button::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 50%;
+        left: 50%;
+        width: 1rem;
+        height: 1rem;
+        transform: translate3d(-50%,-50%,0) scale(0,0);
+        border-radius: 50%;
+        background-color: #d26f36;
+        transform-origin: center;
+        transition: ease-in-out .5s;
+    }
+    
+    button:hover::before {
+        transform: translate3d(-50%,-50%,0) scale(15,15);
+    }
+    
+} 
