@@ -15,7 +15,7 @@ function PageNotFound(){
             <h2>Oops! Page Not Found</h2>
             <p>This page doesn't exist or was removed!<br/>
             We suggest you back to home.</p>
-            <button onClick={goBack}><span>Back to Homepage</span></button>	
+            <button onClick={goBack}><span>Back</span></button>	
         </div>
     )
 } 
