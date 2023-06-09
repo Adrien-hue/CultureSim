@@ -2,7 +2,7 @@ import "./CS_Interpretation.scss";
 
 import { PTitle } from "../../atoms";
 
-const CS_Interpretation = ({content, title, isTrue, ...props}) => {
+const CS_Interpretation = ({content, title, isTrue, btnFunction, ...props}) => {
     const handleClick = () => {
         let plouf = `this answer is `;
 
@@ -14,7 +14,7 @@ const CS_Interpretation = ({content, title, isTrue, ...props}) => {
         alert(plouf);
     }
 
-    return <button className="CS_interpretation" onClick={handleClick}>
+    return <button className="CS_interpretation" onClick={btnFunction}>
         <PTitle title={title} content={content} />
     </button>
 }

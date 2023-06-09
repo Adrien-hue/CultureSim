@@ -1,9 +1,23 @@
 import "./CaseStory.scss";
 
-import { PShadow } from "../../components/atoms";
-import { CS_Interpretation } from "../../components/molecules";
+import { useState } from "react";
+import { PShadow } from "../../atoms";
+import { CS_Interpretation } from "../../molecules";
 
-const CaseStory = ({caseStory, ...props}) => {
+const CaseStory = ({caseStory, updateNavigation, situationIndex, setShowModal, setModalTitle, setModalContent, setModalType, ...props}) => {
+    const handleClickInterpretation = (comment, isTrue, situationIndex, updateNavigation) => {
+        setModalContent(comment);
+        if(isTrue){
+            setModalTitle("Congratulation!");
+            setModalType("success");
+            updateNavigation(situationIndex + 1)
+        } else {
+            setModalTitle("Try again...");
+            setModalType("danger");
+        }
+        setShowModal(true);
+    }
+
     const alphabet = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
     
     let id = caseStory.id;
@@ -13,17 +27,27 @@ const CaseStory = ({caseStory, ...props}) => {
 
     let arAnswers = caseStory.answers;
 
-    return <div className="CaseStory-container">
+    let customClass = "CaseStory-container";
+    if(props.customClass){
+        customClass += ` ${props.customClass}`;
+    }
+
+    return <div className={customClass}>
         <div className="CaseStory-statement">
             <PShadow content={context} key={`context` + id}/>
-            <PShadow content={question} type= "question" key={`question` + id}/>
+            <PShadow content={question} key={`question` + id}/>
         </div>
         <div className="CaseStory-interpretations">
             {arAnswers.map((el, i) => {
-                return <CS_Interpretation content={el.interpretation} title={`Answer ` + alphabet[i]} isTrue={el.isTrue} key={`answer` + alphabet[i] + id}/>
+                return <CS_Interpretation 
+                    content={el.interpretation} 
+                    title={`Answer ` + alphabet[i]} 
+                    isTrue={el.isTrue} 
+                    key={`answer` + alphabet[i] + id}
+                    btnFunction={() => handleClickInterpretation(el.comment, el.isTrue, situationIndex, updateNavigation)}
+                />
             })}
         </div>
-        
     </div>
 }
 

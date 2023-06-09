@@ -1,0 +1,64 @@
+@import "../../styles/_variables.scss";
+.tabs {
+
+    .tabs-nav {
+        overflow: hidden;
+    
+        border: 1px solid $mandarin;
+        
+        background-color: $flesh;
+    
+        .nav-button {
+            padding: 14px 16px;
+    
+            background-color: inherit;
+    
+            float: left;
+            
+            border: none;
+            
+            outline: none;
+            
+            cursor: pointer;
+            
+            font-size: 17px;
+            
+            transition: 0.3s;
+        }
+    
+        .nav-button:hover, .nav-button.active {
+            background-color: $mandarin;
+    
+            color: white;
+        }
+    }
+    
+    .tab-content {
+        display: none;
+    }
+    
+    .tab-content.active {
+        display: flex;
+    }
+
+    .tabs-actions {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        .button-action {
+            cursor: pointer;
+
+            min-width: 100px;
+            padding: 10px 15px;
+
+            background-color: $mandarin;
+
+            border: 2px solid $mandarin;
+            border-radius: 5px;
+
+            color: white;
+            font-weight: bold;
+        }
+    }
+}

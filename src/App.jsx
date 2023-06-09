@@ -4,7 +4,7 @@ import React from 'react';
 import './App.scss';
 
 import { Header, Footer } from './components/molecules';
-import { CaseStory_Home, Home } from './containers';
+import { CaseStory_Home, Home, Quiz } from './containers';
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='quiz/:country' element={<CaseStory_Home />} />
+          <Route path='quiz/:country/:quiz' element={<Quiz />} />
         </Routes>
 			</main>
 
