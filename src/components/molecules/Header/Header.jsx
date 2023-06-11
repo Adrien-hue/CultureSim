@@ -2,35 +2,30 @@ import "./Header.scss";
 
 import { Link as RouterLink } from "react-router-dom";
 
-import logo_capire from "../../../assets/CAPIRE_logo.jpg"
+import logo_capire from "../../../assets/CAPIRE_logo_transparant.png"
+import img_user from "../../../assets/user.png"
 import logo_ue from "../../../assets/EU.jpg";
 
 const Header = () => {
-    return <header className="App-header">
-        <div className='headerPresentation'>
-            <RouterLink to={`/`}>
-                <div className="brandContainer">
-                    <img className="item headerImg" src={logo_capire} alt="logo_capire" title="Accueil" />
+    return <header className="app-header">
+        <RouterLink to={`/`}>
+            <section className="header-brand">
+                <img className="brand-logo" src={logo_capire} alt="logo capire" />
 
-                    <div className="brandInfos">
-                        <h1 className='item brandName'>CAPIRE</h1>
+                <div className="brand-infos">
+                    <h1>Culture Sim</h1>
 
-                        <p className='item'>Understanding other cultures</p>
-                    </div>
+                    <p>Understanding other cultures</p>
                 </div>
-            </RouterLink>
-        
-            <img className="item headerImg" src={logo_ue} alt="logo_europe_union"/>
-        </div>
-        
-        
-        <nav className='navHeader'>
-            <div className='navItem'>
-                <a href='#'>EN</a>, <a href='#'>PL</a>, <a href='#'>FR</a>, <a href='#'>NL</a>, <a href='#'>IT</a>, <a href='#'>DE</a>
-            </div>
+            </section>
+        </RouterLink>
 
-            <a className='navItem' href='#'>Login</a>
-        </nav>
+        <section className="header-nav">
+            <RouterLink to={`/login`} className="nav-link">
+                <img src={img_user} alt="Account image" className="link-img" />
+                Account
+            </RouterLink>
+        </section>
   </header>
 }
 
