@@ -8,9 +8,23 @@
 	text-align: left;
 
 	.form-title {
-		margin-bottom: 40px;
-
 		font-size: 2em;
+	}
+
+	.form-information {
+		width: 100%;
+		height: 30px;
+		padding: 4px 0;
+
+		font-size: 16px;
+	}
+
+	.form-information.success {
+		color: $success_color;
+	}
+
+	.form-information.danger {
+		color: $danger_color;
 	}
 
 	.form-input {
@@ -45,6 +59,8 @@
 		color: white;
 		text-align: center;
 		font-weight: bold;
+
+		cursor: pointer;
 	}
 
 	.form-error {
@@ -55,10 +71,9 @@
 	}
 }
 
-a.inline-link {
+a.inline-link:link, a.inline-link:visited{
 	color: $gold_drop;
 	font-weight: bold;
-	text-decoration: underline;
 }
 
 .separator {
