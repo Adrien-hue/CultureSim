@@ -1,6 +1,5 @@
 import "./CaseStory.scss";
 
-import { useState } from "react";
 import { PShadow } from "../../atoms";
 import { CS_Interpretation } from "../../molecules";
 
