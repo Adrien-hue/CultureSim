@@ -1,13 +1,17 @@
 import { Routes, Route } from 'react-router-dom';
+
+
 import React from 'react';
 
 import './App.scss';
 
-import { Header, Footer } from './components/molecules';
+import { Header, Footer, CountryDetails } from './components/molecules';
 import { CaseStory_Home, Home, Login, Register, Quiz, PageNotFound } from './containers';
+import { CaseStory_Home, Home } from './containers';
 
 function App() {
-  return (
+
+   return (
     <div className="App">
       
       <Header />
@@ -19,6 +23,7 @@ function App() {
           <Route path='quiz/:country/:quiz' element={<Quiz />} />
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />
+          <Route path='admin/country/:country' element={<CountryDetails />} />
           <Route path='*' element={<PageNotFound/>} />
         </Routes>
 			</main>
