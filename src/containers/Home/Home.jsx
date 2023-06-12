@@ -25,11 +25,11 @@ const Home = () => {
     return <div>
         <ImgSideText text={home_text} img="home_tmp.jpg" img_side="left"/>
 
-        <img src={banner_home} alt="banner_home" className="mv-3" style={{width: 100 + '%'}}/>
+        <img src={banner_home} alt="banner_home" className="banner mv-3" />
 
         <h2 className="mv-2">Countries</h2>
 
-        <div className="flex flex_space-ard mv-2">
+        <div className="carrousel mv-2">
             {arCaseStory_Home.map((el) => {
                 return <RouterLink to={`quiz/` + el.name} key={`cardLink_` + el.name}>
                     <CountryCard name={el.name} image={el.img} />

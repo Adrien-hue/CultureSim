@@ -8,11 +8,12 @@
     width: 100%;
     
     .imgSideText-img {
-        max-width: 48%;
+        width: 48%;
+        min-width: 270px;
     }
 
     .imgSideText-p {
-        max-width: 48%;
+        width: 48%;
         height: fit-content;
 
         text-align: justify;
@@ -25,4 +26,19 @@
     .right-element {
         order: 2;
     }
+}
+
+@media screen and (max-width: 660px) {
+    .imgSideText-container {
+        flex-direction: column;
+
+        .imgSideText-img {
+            width: 100%;
+        }
+    
+        .imgSideText-p {
+            width: 100%;
+            margin-top: 5px;
+        }
+    }    
 }

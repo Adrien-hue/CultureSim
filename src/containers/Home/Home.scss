@@ -1,2 +1,17 @@
 @import "../../styles/_variables.scss";
 
+.imgSideText-container {
+    flex-wrap: wrap;
+}
+
+.banner {
+    width: 100%;
+}
+
+.carrousel {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 32px; 
+}
