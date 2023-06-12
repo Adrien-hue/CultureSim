@@ -1,7 +1,7 @@
 import "./Header.scss";
 
 import { Link as RouterLink } from "react-router-dom";
-import { Dropdown, ImgSideText } from "../../atoms";
+import { ImgSideText, Dropdown } from "../../atoms";
 
 import logo_capire from "../../../assets/CAPIRE_logo_transparant.png"
 import img_user from "../../../assets/user.png"
