@@ -4,8 +4,44 @@ import { Link as RouterLink } from "react-router-dom";
 
 import logo_capire from "../../../assets/CAPIRE_logo.jpg"
 import logo_ue from "../../../assets/EU.jpg";
+import { Dropdown, ImgSideText } from "../../atoms";
 
 const Header = () => {
+
+    const data_CountriesFlags = [
+           
+        {
+            name:"French", 
+            code: "FR",
+            flag: "france.png"
+        },
+
+        {
+            name:"Deutsch",
+            code:"GM",
+            flag: "allemagne.png"
+        },
+        {
+            name:"Italian",
+            code:"IT",
+            flag: "italie.png"
+        },
+        {
+            name:"Dutch",
+            code:"NL",
+            flag: "pays-bas.png"
+        },
+        {
+            name:"Polish",
+            code:"PL",
+            flag: "pologne.png"
+        }
+    ]
+
+    const arCompCountryFlags = data_CountriesFlags.map((item) => {
+        return <ImgSideText text={item.code} img={item.flag} img_side='left'/>
+    })
+
     return <header className="App-header">
         <div className='headerPresentation'>
             <RouterLink to={`/`}>
@@ -26,7 +62,10 @@ const Header = () => {
         
         <nav className='navHeader'>
             <div className='navItem'>
-                <a href='#'>EN</a>, <a href='#'>PL</a>, <a href='#'>FR</a>, <a href='#'>NL</a>, <a href='#'>IT</a>, <a href='#'>DE</a>
+                <div className="Countries_Flags">
+                    <Dropdown title="Language" content={arCompCountryFlags} />
+                </div>
+                
             </div>
 
             <a className='navItem' href='#'>Login</a>
