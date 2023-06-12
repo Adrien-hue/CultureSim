@@ -1,13 +1,17 @@
 import { Routes, Route } from 'react-router-dom';
+
+
 import React from 'react';
 
 import './App.scss';
 
 import { Header, Footer } from './components/molecules';
 import { CaseStory_Home, Home } from './containers';
+import { CountryDetails } from './components/molecules/CountryDetails';
 
 function App() {
-  return (
+
+   return (
     <div className="App">
       
       <Header />
@@ -16,6 +20,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='quiz/:country' element={<CaseStory_Home />} />
+          <Route path='admin/country/:country' element={<CountryDetails />} />
         </Routes>
 			</main>
 

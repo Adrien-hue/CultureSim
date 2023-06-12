@@ -1,0 +1,52 @@
+.details-container {
+
+    text-align: left;
+
+    .details-title {
+
+        margin-bottom: 50px ;
+
+    }
+
+    .details {
+
+        .details-row {
+            display: flex;
+            align-items: flex-start;
+            
+
+            .details-label {
+                width: 190px;
+
+                margin-bottom: 20px;
+                
+
+                font-weight: bold;
+            }
+
+            .details-name{
+
+                width: fit-content;
+                text-align: justify;
+            }
+
+            .details-text {
+                width: fit-content;
+                text-align: justify;
+
+                margin-left: 25px;
+                margin-bottom: 20px;
+
+
+
+            }
+
+            .details-img img {
+
+                width: 400px;
+                height: 200px;
+
+            }
+        }
+    }
+}
