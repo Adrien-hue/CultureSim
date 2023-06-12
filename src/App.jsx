@@ -7,7 +7,6 @@ import './App.scss';
 
 import { Header, Footer, CountryDetails } from './components/molecules';
 import { CaseStory_Home, Home, Login, Register, Quiz, PageNotFound } from './containers';
-import { CaseStory_Home, Home } from './containers';
 
 function App() {
 
