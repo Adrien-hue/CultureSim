@@ -16,7 +16,8 @@ const schema = yup.object().shape({
     interpretation2: yup.string().required('Field void, please put your answer !'),
     interpretation3: yup.string().required('Field void, please put your answer !'),
     interpretation4: yup.string().required('Field void, please put your answer !'),
-    question: yup.string().required('Field void, please put your question !')
+    question: yup.string().required('Field void, please put your question !'),
+    good_answer: yup.string().oneOf(['good_answerA', 'good_answerB', 'good_answerC', 'good_answerD']).required('Please select a good answer !')
 })
 
 
@@ -62,7 +63,18 @@ const { register, handleSubmit, formState: { errors } } = useForm({
       />
             {errors.question && <div className="error-message">{errors.question.message}</div>}
           
-            <div className='lmj-Edit_CaseStory-read'><p>Answer A :</p></div>
+          
+            <div className='lmj-Edit_CaseStory-answer-check'><p>Answer A :</p>
+
+            <input 
+            type="radio" 
+            name="good_answer"  
+            value="good_answerA" 
+          {...register("good_answer")}
+          /> <label for="good_answerA">Good Answer</label>
+            </div>
+          
+
             <textarea className = "form-input"
             type="text" 
             name="interpretation1" 
@@ -71,6 +83,8 @@ const { register, handleSubmit, formState: { errors } } = useForm({
       />
             {errors.interpretation1 && <div className="error-message">{errors.interpretation1.message}</div>}
            
+           
+
             <div className='lmj-Edit_CaseStory-read'><p>Comment A :</p></div>
             <textarea className = "form-input"
             type="text" 
@@ -80,7 +94,15 @@ const { register, handleSubmit, formState: { errors } } = useForm({
       />
             {errors.commentaire1 && <div className="error-message">{errors.commentaire1.message}</div>}
           
-            <div className='lmj-Edit_CaseStory-read'><p>Answer B :</p></div>
+            <div className='lmj-Edit_CaseStory-answer-check'><p>Answer B :</p>
+            <input 
+            type="radio" 
+            name="good_answer" 
+            value="good_answerB" 
+            {...register("good_answer")}
+          /> <label for="good_answerB">Good Answer</label>
+          </div>
+
             <textarea className = "form-input"
             type="text" 
             name="interpretation2" 
@@ -88,6 +110,8 @@ const { register, handleSubmit, formState: { errors } } = useForm({
             { ...register("interpretation2")}
       />
             {errors.interpretation2 && <div className="error-message">{errors.interpretation2.message}</div>}
+
+            
 
             <div className='lmj-Edit_CaseStory-read'><p>Comment B :</p></div>
             <textarea className = "form-input"
@@ -98,15 +122,27 @@ const { register, handleSubmit, formState: { errors } } = useForm({
       />
             {errors.commentaire2 && <div className="error-message">{errors.commentaire2.message}</div>}
 
-            <div className='lmj-Edit_CaseStory-read'><p>Answer C :</p></div>
+            <div className='lmj-Edit_CaseStory-answer-check'><p>Answer C :</p>
+            <input 
+            type="radio" 
+            name="good_answer" 
+            value="good_answerC" 
+            {...register("good_answer")}
+          /> <label for="good_answerC">Good Answer</label>
+          </div>
+
+
             <textarea className = "form-input"
             type="text" 
             name="interpretation3" 
             placeholder='Answer C'
             { ...register("interpretation3")}
+    
       />
             {errors.interpretation3 && <div className="error-message">{errors.interpretation3.message}</div>}
           
+           
+
             <div className='lmj-Edit_CaseStory-read'><p>Comment C :</p></div>
             <textarea className = "form-input"
             type="text" 
@@ -116,7 +152,17 @@ const { register, handleSubmit, formState: { errors } } = useForm({
       />
             {errors.commentaire2 && <div className="error-message">{errors.commentaire3.message}</div>}
 
-            <div className='lmj-Edit_CaseStory-read'><p>Answer D :</p></div>
+            <div className='lmj-Edit_CaseStory-answer-check'><p>Answer D :</p>
+            <input 
+            type="radio" 
+            name="good_answer" 
+            value="good_answerD" 
+            {...register("good_answer")}
+          /> <label for="good_answerD">Good Answer</label>
+          </div>
+
+          {errors.good_answer && <div className="error-message">{errors.good_answer.message}</div>}
+
             <textarea className = "form-input"
             type="text" 
             name="interpretation4" 
@@ -125,6 +171,7 @@ const { register, handleSubmit, formState: { errors } } = useForm({
       />
             {errors.interpretation4 && <div className="error-message">{errors.interpretation4.message}</div>}
           
+           
             <div className='lmj-Edit_CaseStory-read'><p>Comment D :</p></div>
             <textarea className = "form-input"
             type="text" 
@@ -134,6 +181,7 @@ const { register, handleSubmit, formState: { errors } } = useForm({
       />
             {errors.commentaire4 && <div className="error-message">{errors.commentaire4.message}</div>}
 
+            
             <div className='lmj-Edit_CaseStory-read'><p>Final Comment :</p></div>
             <textarea className = "form-input"
             type="text" 
