@@ -72,7 +72,7 @@ const Header = () => {
                     Login
                 </RouterLink>}
 
-            <Dropdown title="Language" content={arCompCountryFlags} />
+            <Dropdown title="Language" content={arCompCountryFlags} className="nav-link" />
         </nav>
   </header>
 }

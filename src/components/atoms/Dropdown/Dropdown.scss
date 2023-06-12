@@ -7,17 +7,20 @@
     flex-direction: column;
     justify-content: center;
 
+    color: inherit;
+    font-size: inherit;
+
     .DropDown_btn{
         display: flex;
         align-items: center;
-
-        padding: 4px;
         
         background-color: $flesh;
+
+        font-size: 20px;
         
-        font-style: bold;
-        
-        border: 4px solid transparent;
+        border: none;
+
+        cursor: pointer;
 
         .caret{
             width: 16px;
@@ -45,15 +48,14 @@
         
         background-color: $flesh;
 
-        color: black;
-
         .Drop_Item{
             padding: 4px 8px;
 
             cursor: pointer;
 
             img {
-                max-width: 20px;
+                min-width: unset;
+                width: 20px;
             }
         }
 
