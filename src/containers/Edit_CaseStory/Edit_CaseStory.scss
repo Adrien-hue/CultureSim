@@ -55,3 +55,24 @@ header{
           transition:all .3s;
           background-color: orange;
         }
+        
+        .lmj-Edit_CaseStory-answer-check{
+            display: flex;
+            margin: 10px;
+            content:attr(type);
+            margin:28px 0 28px;
+            padding:18px 0 0px;
+            
+            color:#5a5a5a;
+            float: left
+        }
+        .lmj-Edit_CaseStory-answer-check p {
+            margin-right: 15px;
+            font-size:20px; /* Espacement entre Answer D et l'input radio */
+          }
+          
+          .lmj-Edit_CaseStory-answer-check label {
+            font-size: 19px; /* Taille de police réduite pour Good Answer */
+            color: green; 
+            font-style: italic;
+          }
