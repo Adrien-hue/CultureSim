@@ -4,9 +4,12 @@ import { Link as RouterLink } from "react-router-dom";
 
 import logo_capire from "../../../assets/CAPIRE_logo_transparant.png"
 import img_user from "../../../assets/user.png"
-import logo_ue from "../../../assets/EU.jpg";
+import { useContext } from "react";
+import AuthContext from "../../../contexts/AuthProvider";
 
 const Header = () => {
+    const { auth } = useContext(AuthContext);
+
     return <header className="app-header">
         <RouterLink to={`/`}>
             <section className="header-brand">
@@ -21,10 +24,15 @@ const Header = () => {
         </RouterLink>
 
         <section className="header-nav">
-            <RouterLink to={`/login`} className="nav-link">
-                <img src={img_user} alt="Account image" className="link-img" />
-                Account
-            </RouterLink>
+            {auth.hasOwnProperty('id_user')
+                ? <RouterLink to={`/profil`} className="nav-link">
+                    <img src={img_user} alt="Account image" className="link-img" />
+                    Account
+                </RouterLink>
+                : <RouterLink to={`/login`} className="nav-link">
+                    <img src={img_user} alt="Account image" className="link-img" />
+                    Login
+                </RouterLink>}
         </section>
   </header>
 }
