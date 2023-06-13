@@ -39,6 +39,11 @@
 	}
 
 	.header-nav {
+		display: flex;
+		flex-direction: row;
+		align-items: self-end;
+		column-gap: 20px;
+
 		padding-right: 20px;
 
 		.nav-link {

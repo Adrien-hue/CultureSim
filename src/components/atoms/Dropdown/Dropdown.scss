@@ -1,0 +1,68 @@
+@import "../../../styles/variables";
+
+.DropDown{
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    color: inherit;
+    font-size: inherit;
+
+    .DropDown_btn{
+        display: flex;
+        align-items: center;
+        
+        background-color: $flesh;
+
+        font-size: 20px;
+        
+        border: none;
+
+        cursor: pointer;
+
+        .caret{
+            width: 16px;
+            margin-left: 4px;
+
+            transition: rotate 0.2s;
+        }
+
+        .caret-up {
+            rotate: 180deg;
+        }
+        
+    }
+
+    .Drop{
+        position: absolute;
+        top: 32px;
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        
+        width: auto;
+        padding: 2px;
+        
+        background-color: $flesh;
+
+        .Drop_Item{
+            padding: 4px 8px;
+
+            cursor: pointer;
+
+            img {
+                min-width: unset;
+                width: 20px;
+            }
+        }
+
+        .Drop_Item:hover{
+            background-color: $gold_drop;
+            
+            color: white;
+        }
+    }   
+}
