@@ -44,6 +44,18 @@
 		input::placeholder {
 			color: $dove_gray;
 		}
+
+		select.input {
+			padding: 19px 20px;
+
+			-webkit-appearance: none;
+  			appearance: none;
+
+			background-image: url("../assets/caret_down.png");
+			background-size: 16px;
+			background-repeat: no-repeat;
+			background-position: calc(100% - 20px) center;
+		}
 	}
 
 	.form-submit {

@@ -1,96 +1,171 @@
 import "./Register.scss";
 
-import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import AuthContext from "../../contexts/AuthProvider";
+
+import React, { useState, useContext } from "react";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 function Register() {
-	const [gender, setGender] = useState("");
-	const [role, setRole] = useState("");
+	const { setAuth } = useContext(AuthContext);
+
+	const navigate = useNavigate();
+
+	const [informationContent, setInformationContent] = useState();
+	const [informationClass, _setInformationClass] = useState("form-information");
+
+	const setInformationClass = (customClass) => {
+		_setInformationClass(`form-information ${customClass}`);
+	};
 
 	const schema = yup.object().shape({
-		firstname: yup
-			.string()
-			.required("First name has left blank!"),
-		lastname: yup
-			.string()
-			.required("Last name has left blank!"),
-		username: yup
-			.string()
-			.required("Username has left blank!"),
-		email: yup
-			.string()
-			.email()
-			.required("Email has left blank!"),
+		firstname: yup.string().required("First name has left blank!"),
+		lastname: yup.string().required("Last name has left blank!"),
+		username: yup.string().required("Username has left blank!"),
+		status: yup.string("").required("Status has left blank!"),
+		email: yup.string().email().required("Email has left blank!"),
 		emailConfirmation: yup
 			.string()
-			.oneOf([yup.ref('email'), null], 'Email must match')
+			.oneOf([yup.ref("email"), null], "Email must match")
 			.required("Email confirmation has left blank!"),
-		password: yup
-			.string()
-			.min(8)
-			.required("Password has left blank!"),
+		password: yup.string().min(8).required("Password has left blank!"),
 		passwordConfirmation: yup
 			.string()
-			.oneOf([yup.ref('password'), null], 'Passwords must match')
+			.oneOf([yup.ref("password"), null], "Passwords must match")
 			.required("Password confirmation has left blank!"),
 	});
 
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = useForm({
+	const { register, setValue, handleSubmit, formState: { errors }, } = useForm({
 		resolver: yupResolver(schema),
 	});
-	const onSubmit = (data) => {};
 
-	// const handleChangeGender = (event) => {
-	//   setGender(event.target.value);
-	// };
+	const onSubmit = (data) => {
+		const firstname = data.firstname;
+		const lastname = data.lastname;
+		const username = data.username;
+		const email = data.email;
+		const emailConfirmation = data.emailConfirmation;
+		const password = data.password;
+		const passwordConfirmation = data.passwordConfirmation;
+		const status = data.status;
 
-	// const handleChangeRole = (event) => {
-	//   setRole(event.target.value);
-	// };
+		if(firstname !== "" && lastname !== "" && username !== "" && email !== "" && emailConfirmation !== "" && password !== "" && passwordConfirmation !== "" && status !== "") {
+			if(email !== emailConfirmation) {
+				setInformationContent("Emails do not match!");
+				setInformationClass("danger");
+				return;
+			}
 
-	const handleClick = () => {
-		// implementation details
+			if(password !== passwordConfirmation) {
+				setInformationContent("Passwords do not match!");
+				setInformationClass("danger");
+				return;
+			}
+
+			const url = `http://localhost:8888/capire_api/public/API/user/register`;
+
+			const headers = {
+				"Accept": "application/json",
+				"Content-type": "application/json",
+			};
+
+			const data = {
+				name_user: lastname,
+				first_name_user: firstname,
+				username_user: username,
+				password_user: password,
+				mail_user: email,
+				status_user: status
+			}
+
+			fetch(url, {
+				method: "PUT",
+				headers: headers,
+				body: JSON.stringify(data),
+			})
+			.then((response) => response.json())
+			.then((response) => {
+				if(response.error === 1) {
+					setInformationContent(response.message);
+					setInformationClass("danger");
+				} else {
+					setInformationContent(response.message);
+					setInformationClass("success");
+
+					const id_user = response.user.id_user;
+					const user_access = response.user.access_user;
+					const username = response.user.username_user;
+
+					setAuth({ id_user: id_user, username: username, user_access: user_access });
+
+					setTimeout(() => {
+						navigate("/");
+					}, 1500);
+				}
+			})
+			.catch((err) => {
+				if (!err?.response) {
+					setInformationContent("No server response");
+					setInformationClass("danger");
+				} else {
+					setInformationContent(
+						"An error occured! Please contact an admin."
+					);
+					setInformationClass("danger");
+				}
+			});
+
+		} else {
+			setInformationContent("All fields are required!");
+			setInformationClass("danger");
+			return;
+		}
 	};
 
 	return (
 		<form className="form register-form" onSubmit={handleSubmit(onSubmit)}>
 			<h2 className="form-title">Register</h2>
 
+			<p className={informationClass}>{informationContent}</p>
+
 			<div className="flex flex_space-btw">
 				<div className="form-input">
 					<label className="input-label">First name *</label>
 
-					<input 
-						type="text" 
+					<input
+						type="text"
 						name="firstname"
 						placeholder="First name"
 						className="input"
 						required
 						{...register("firstname")}
 					/>
-					{errors.firstname && <div className="form-error">{errors.firstname.message}</div>}
+					{errors.firstname && (
+						<div className="form-error">
+							{errors.firstname.message}
+						</div>
+					)}
 				</div>
 
 				<div className="form-input">
 					<label className="input-label">Last name *</label>
 
-					<input 
-						type="text" 
+					<input
+						type="text"
 						name="lastname"
 						placeholder="Last name"
 						className="input"
 						required
 						{...register("lastname")}
 					/>
-					{errors.lastname && <div className="form-error">{errors.lastname.message}</div>}
+					{errors.lastname && (
+						<div className="form-error">
+							{errors.lastname.message}
+						</div>
+					)}
 				</div>
 			</div>
 
@@ -98,15 +173,38 @@ function Register() {
 				<div className="form-input">
 					<label className="input-label">Username *</label>
 
-					<input 
-						type="text" 
+					<input
+						type="text"
 						name="username"
 						placeholder="Username"
 						className="input"
 						required
 						{...register("username")}
 					/>
-					{errors.username && <div className="form-error">{errors.username.message}</div>}
+					{errors.username && (
+						<div className="form-error">
+							{errors.username.message}
+						</div>
+					)}
+				</div>
+
+				<div className="form-input">
+					<div className="input-label">Status *</div>
+
+					<select 
+						name="sel_status" 
+						id="sel_status" 
+						className="input" 
+						required 
+						{...register("status")}
+						onChange={(e) => setValue('status', e.target.value, { shouldValidate: true })} // Using setValue
+					>
+						<option value="">Select an option</option>
+						<option value="Student">Student</option>
+						<option value="Professional">Professional</option>
+						<option value="Personal">Personal</option>
+						<option value="Other">Other</option>
+					</select>
 				</div>
 			</div>
 
@@ -114,29 +212,35 @@ function Register() {
 				<div className="form-input">
 					<label className="input-label">Email *</label>
 
-					<input 
-						type="email" 
+					<input
+						type="email"
 						name="email"
 						placeholder="Email"
 						className="input"
 						required
 						{...register("email")}
 					/>
-					{errors.email && <div className="form-error">{errors.email.message}</div>}
+					{errors.email && (
+						<div className="form-error">{errors.email.message}</div>
+					)}
 				</div>
 
 				<div className="form-input">
 					<label className="input-label">Email confirmation *</label>
 
-					<input 
-						type="text" 
+					<input
+						type="text"
 						name="emailConfirmation"
 						placeholder="Email"
 						className="input"
 						required
 						{...register("emailConfirmation")}
 					/>
-					{errors.emailConfirmation && <div className="form-error">{errors.emailConfirmation.message}</div>}
+					{errors.emailConfirmation && (
+						<div className="form-error">
+							{errors.emailConfirmation.message}
+						</div>
+					)}
 				</div>
 			</div>
 
@@ -144,234 +248,55 @@ function Register() {
 				<div className="form-input">
 					<label className="input-label">Password *</label>
 
-					<input 
-						type="password" 
+					<input
+						type="password"
 						name="password"
 						placeholder="Password"
 						className="input"
 						required
 						{...register("password")}
 					/>
-					{errors.password && <div className="form-error">{errors.password.message}</div>}
+					{errors.password && (
+						<div className="form-error">
+							{errors.password.message}
+						</div>
+					)}
 				</div>
 
 				<div className="form-input">
-					<label className="input-label">Password confirmation *</label>
+					<label className="input-label">
+						Password confirmation *
+					</label>
 
-					<input 
-						type="password" 
+					<input
+						type="password"
 						name="passwordConfirmation"
 						placeholder="Password"
 						className="input"
 						required
 						{...register("passwordConfirmation")}
 					/>
-					{errors.passwordConfirmation && <div className="form-error">{errors.passwordConfirmation.message}</div>}
+					{errors.passwordConfirmation && (
+						<div className="form-error">
+							{errors.passwordConfirmation.message}
+						</div>
+					)}
 				</div>
 			</div>
 
-			<button type="submit" id="register" className="form-submit">Register</button>
+			<button type="submit" id="register" className="form-submit">
+				Register
+			</button>
 
 			<div className="separator"></div>
 
-			<p className="mv-1">Already an account? <RouterLink to="/login" className="inline-link">Log in here!</RouterLink></p>
+			<p className="mv-1">
+				Already an account?{" "}
+				<RouterLink to="/login" className="inline-link">
+					Log in here!
+				</RouterLink>
+			</p>
 		</form>
-		// <header>
-		//   <form onSubmit={handleSubmit(onSubmit)}>
-		//     <div class="con">
-		//       <div className="lmj-Sign_up-title">
-		//         <h2>Sign Up :</h2>
-		//       </div>
-		//       <div className="lmj-Sign_up-read">
-		//         <p>E-mail :</p>
-		//       </div>
-		//       <input
-		//         className="form-input"
-		//         type="email"
-		//         name="email"
-		//         placeholder="Email"
-		//         {...register("email")}
-		//       />
-		//       {errors.email && (
-		//         <div className="error-message">{errors.email.message}</div>
-		//       )}
-		//       <div className="lmj-Sign_up-read">
-		//         <p>Confirm your email :</p>
-		//       </div>
-		//       <input
-		//         className="form-input"
-		//         type="text"
-		//         name="emailConfirmation"
-		//         placeholder="Confirm your email"
-		//         {...register("emailConfirmation")}
-		//       />
-		//       {errors.emailConfirmation && (
-		//         <div className="error-message">
-		//           {errors.emailConfirmation.message}
-		//         </div>
-		//       )}
-		//       <div className="lmj-Sign_up-read">
-		//         <p>First name :</p>
-		//       </div>
-		//       <input
-		//         className="form-input"
-		//         type="text"
-		//         name="firstname"
-		//         placeholder="First name"
-		//         {...register("firstname")}
-		//       />
-		//       {errors.firstname && (
-		//         <div className="error-message">{errors.firstname.message}</div>
-		//       )}
-		//       <div className="lmj-Sign_up-read">
-		//         <p>Last name :</p>
-		//       </div>
-		//       <input
-		//         className="form-input"
-		//         type="text"
-		//         name="lastname"
-		//         placeholder="Last name"
-		//         {...register("lastname")}
-		//       />
-		//       {errors.lastname && (
-		//         <div className="error-message">{errors.lastname.message}</div>
-		//       )}
-		//       <div className="lmj-Sign_up-read">
-		//         <p>City :</p>
-		//       </div>
-		//       <input
-		//         className="form-input"
-		//         type="text"
-		//         name="city"
-		//         placeholder="Enter the city you live"
-		//         {...register("city")}
-		//       />
-		//       {errors.city && (
-		//         <div className="error-message">{errors.city.message}</div>
-		//       )}
-		//       <div className="lmj-Sign_up-read">
-		//         <p>Country :</p>
-		//       </div>
-		//       <input
-		//         className="form-input"
-		//         type="text"
-		//         name="country"
-		//         placeholder="Enter the country you live"
-		//         {...register("country")}
-		//       />
-		//       {errors.country && (
-		//         <div className="error-message">{errors.country.message}</div>
-		//       )}
-		//       <div className="lmj-Sign_up-read">
-		//         <p>Company / Institution:</p>
-		//       </div>
-		//       <input
-		//         className="form-input"
-		//         type="text"
-		//         name="company"
-		//         placeholder="Enter your institution or company"
-		//         {...register("company")}
-		//       />
-		//       {errors.company && (
-		//         <div className="error-message">{errors.company.message}</div>
-		//       )}
-		//       <div className="lmj-Sign_up-read">
-		//         <p>Gender Identity :</p>
-		//       </div>
-		//       <br></br>
-		//       <input
-		//         type="radio"
-		//         name="gender"
-		//         value="male"
-		//         // checked={gender === 'male'}
-		//         //onChange={handleChangeGender}
-		//         {...register("gender")}
-		//       />{" "}
-		//       <span className="lmj-Sign_up-check"> Male</span>
-		//       {"\u00A0\u00A0"}
-		//       <input
-		//         type="radio"
-		//         name="gender"
-		//         value="female"
-		//         // checked={gender === 'female'}
-		//         // onChange={handleChangeGender}
-		//         {...register("gender")}
-		//       />{" "}
-		//       <span className="lmj-Sign_up-check"> Female</span>
-		//       {"\u00A0\u00A0"}
-		//       <input
-		//         type="radio"
-		//         name="gender"
-		//         value="others"
-		//         //checked={gender === 'others'}
-		//         //onChange={handleChangeGender}
-		//         {...register("gender")}
-		//       />
-		//       <span className="lmj-Sign_up-check"> Others</span>
-		//       {errors.gender && (
-		//         <div className="error-message">{errors.gender.message}</div>
-		//       )}
-		//       <div className="lmj-Sign_up-read">
-		//         <p>Role :</p>
-		//       </div>
-		//       <br></br>
-		//       <input
-		//         type="radio"
-		//         name="role"
-		//         value="student"
-		//         // checked={role === 'student'}
-		//         // onChange={handleChangeRole}
-		//         {...register("role")}
-		//       />
-		//       <span className="lmj-Sign_up-check"> Student </span>
-		//       {"\u00A0\u00A0"}
-		//       <input
-		//         type="radio"
-		//         name="role"
-		//         value="teacher"
-		//         // checked={role === 'teacher'}
-		//         // onChange={handleChangeRole}
-		//         {...register("role")}
-		//       />{" "}
-		//       <span className="lmj-Sign_up-check"> Teacher</span>
-		//       {"\u00A0\u00A0"}
-		//       <input
-		//         type="radio"
-		//         name="role"
-		//         value="professional"
-		//         //checked={role === 'professional'}
-		//         //onChange={handleChangeRole}
-		//         {...register("role")}
-		//       />{" "}
-		//       <span className="lmj-Sign_up-check"> Professional</span>
-		//       {"\u00A0\u00A0"}
-		//       <input
-		//         type="radio"
-		//         name="role"
-		//         value="others"
-		//         //checked={role === 'others'}
-		//         //onChange={handleChangeRole}
-		//         {...register("role")}
-		//       />{" "}
-		//       <span className="lmj-Sign_up-check"> Others</span>
-		//       {errors.role && (
-		//         <div className="error-message">{errors.role.message}</div>
-		//       )}
-		//       <br></br>
-		//       <br></br>
-		//       <div>
-		//         <button
-		//           className="lmj-Sign_up-button"
-		//           type="submit"
-		//           id="submit"
-		//           onClick={handleClick}
-		//         >
-		//           Sign up
-		//         </button>
-		//       </div>
-		//     </div>
-		//   </form>
-		// </header>
 	);
 }
 
