@@ -43,7 +43,7 @@ function Login() {
 			const url = `http://localhost:8888/capire_api/public/API/user/login`;
 
 			const headers = {
-				Accept: "application/json",
+				"Accept": "application/json",
 				"Content-type": "application/json",
 			};
 
