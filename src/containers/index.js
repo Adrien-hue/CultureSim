@@ -4,5 +4,6 @@ import { Quiz } from "./Quiz";
 import { Login } from "./Login";
 import { Register } from "./Register";
 import { PageNotFound } from "./PageNotFound";
+import { Account } from "./Account";
 
-export { CaseStory_Home, Home, Quiz, Login, Register, PageNotFound };
+export { CaseStory_Home, Home, Quiz, Login, Register, PageNotFound, Account };

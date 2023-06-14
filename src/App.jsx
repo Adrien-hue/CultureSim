@@ -6,7 +6,7 @@ import React from 'react';
 import './App.scss';
 
 import { Header, Footer, CountryDetails } from './components/molecules';
-import { CaseStory_Home, Home, Login, Register, Quiz, PageNotFound } from './containers';
+import { CaseStory_Home, Home, Login, Register, Quiz, PageNotFound, Account } from './containers';
 
 function App() {
 
@@ -22,6 +22,7 @@ function App() {
           <Route path='quiz/:country/:quiz' element={<Quiz />} />
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />
+          <Route path='my-account' element={<Account />} />
           <Route path='admin/country/:country' element={<CountryDetails />} />
           <Route path='*' element={<PageNotFound/>} />
         </Routes>
