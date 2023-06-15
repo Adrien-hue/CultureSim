@@ -3,8 +3,10 @@ import React from 'react';
 
 import './App.scss';
 
-import { Header, Footer } from './components/molecules';
+import { Header, Footer, Datatable } from './components/molecules';
 import { CaseStory_Home, Home, Login, Register, Quiz, PageNotFound } from './containers';
+
+import data_user from "./data_user.json";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
       <Header />
 
 			<main className='mv-3 ph-3'>
+        <Datatable json={data_user}/>
+        
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='quiz/:country' element={<CaseStory_Home />} />
