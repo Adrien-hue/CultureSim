@@ -6,13 +6,11 @@ import { ImgSideText, Dropdown } from "../../atoms";
 import logo_capire from "../../../assets/CAPIRE_logo_transparant.png"
 import img_user from "../../../assets/user.png"
 
-import { useContext } from "react";
-import AuthContext from "../../../contexts/AuthProvider";
-
+import { useAuth } from "../../../hooks";
 
 const Header = () => {
 
-    const { auth } = useContext(AuthContext);
+    const { auth } = useAuth();
 
     const data_CountriesFlags = [
            
@@ -63,7 +61,7 @@ const Header = () => {
 
         <nav className="header-nav">
             {auth.hasOwnProperty('id_user')
-                ? <RouterLink to={`/profil`} className="nav-link">
+                ? <RouterLink to={`/my-account`} className="nav-link">
                     <img src={img_user} alt="Account image" className="link-img" />
                     Account
                 </RouterLink>
