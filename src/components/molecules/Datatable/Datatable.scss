@@ -1,104 +1,63 @@
 @import "../../../styles/_variables.scss";
 
- 
+.datatable {
+	border-spacing: 0;
 
-table {
-  table-layout: fixed; 
-  width: auto;
-  height: auto; 
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  border-spacing: 0;
+	width: auto;
+	height: auto;
+	border-radius: 8px;
 
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	overflow: hidden;
+
+	.datatable-thead {
+		.thead-row {
+			.thead-cell {
+				height: 100px;
+				padding: 10px;
+
+				background-color: $alto;
+
+				border-bottom: 2px solid #78788c;
+			}
+		}
+	}
+
+	.datatable-tbody {
+		text-align: left;
+
+		.tbody-row {
+			.tbody-cell {
+				vertical-align: middle;
+
+				padding: 20px;
+
+				border-bottom: 2px solid #78788c;
+			}
+
+			.tbody-action_cell {
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+				column-gap: 15px;
+
+				.button {
+					padding: 10px;
+					margin: 0;
+				}
+
+				.button.modify-button {
+					background-color: $success_color;
+
+					border-color: $success_color;
+				}
+
+				.button.delete-button {
+					background-color: $danger_color;
+
+					border-color: $danger_color;
+				}
+			}
+		}
+	}
 }
-  
-  
-  th, td {
-    padding: 5px ;
-
-  }   
-
-  th {
-    width: auto;
-    height: 100px;
-    letter-spacing: 2px;
-    background-color: $alto;
-    table-layout: auto;
-    padding: 10px;
-    margin: 50px;
-  }
-  
-  td {
-    letter-spacing: 1px;
-    padding: 20px;
-    vertical-align: middle;
-    border-bottom:2px solid #78788c;
-  }
-  
-  tbody td {
-    text-align: center;
-  }
-  
-  tfoot th {
-    text-align: right;
-  }
-
-  head, tfoot {
-    
-    color: white;
-    text-shadow: 1px 1px 1px black;
-  }
-  
- 
-      .lmj-Datatable-button-modify{    
-       
-        width: auto;
-        padding: 7px ;
-        margin: 5px 3px ;
-        
-
-        background-color: $success_color;
-
-        border: 1px solid $success_color;
-        border-radius: 100px;
-
-        color: white;
-        text-align: center;
-        font-weight: bold;
-
-        cursor: pointer;
-    }
-
-.lmj-Datatable-button-suppr{
-       
-        width: auto;
-        padding: 7px ;
-        margin: 5px 3px ;
-      
-
-        background-color: $danger_color;
-       
-
-        border: 1px solid  $danger_color;
-        border-radius: 100px;
-
-        color: white;
-        text-align: center;
-        font-weight: bold;
-
-        cursor: pointer;
-}
-
-.lmj-Datatable-button-td {
-  
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 5px;
-  
-}
-
-
-
-
