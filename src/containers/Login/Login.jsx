@@ -1,18 +1,22 @@
 import "./Login.scss";
 
-import React, { useState, useContext } from "react";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
-import AuthContext from "../../contexts/AuthProvider";
+import React, { useState } from "react";
+import { Link as RouterLink, useNavigate, useLocation } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { useAuth } from "../../hooks";
+
 function Login() {
-	const { setAuth } = useContext(AuthContext);
+	const { setAuth } = useAuth();
 
 	const navigate = useNavigate();
+
+	const location = useLocation();
+	const from = location.state?.from?.pathname || "/";
 
 	const [informationContent, setInformationContent] = useState();
 	const [informationClass, _setInformationClass] =
@@ -74,7 +78,7 @@ function Login() {
 						setAuth({ id_user: id_user, username: username, user_access: user_access });
 
 						setTimeout(() => {
-							navigate("/");
+							navigate(from, {replace: true});
 						}, 1500);
 					}
 				})

@@ -9,9 +9,9 @@ const CountryDetails = () => {
 
   const data_country = countryData.find( el => el.name === params_country);
 
-  let picture = data_country.img;
-  let name = data_country.name;
-  let text = data_country.text;
+  let picture = "france.png";
+  let name = "france";
+  let text = "bleu";
 
   return <div className="details-container">
     <h1 className="details-title">{name}</h1>

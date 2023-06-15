@@ -1,16 +1,16 @@
 import "./Register.scss";
 
-import AuthContext from "../../contexts/AuthProvider";
-
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { useAuth } from "../../hooks";
+
 function Register() {
-	const { setAuth } = useContext(AuthContext);
+	const { setAuth } = useAuth();
 
 	const navigate = useNavigate();
 

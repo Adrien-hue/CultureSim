@@ -1,17 +1,18 @@
 import "./Account.scss";
 
-import { useContext, useEffect, useState } from "react";
-import AuthContext from "../../contexts/AuthProvider";
+import { useEffect, useState } from "react";
+
+import { useAuth } from "../../hooks";
 
 const Account = () => {
 
-    const {auth} = useContext(AuthContext);
+    const {auth} = useAuth();
 
     const [user_data, setUser_data] = useState([]);
 
     useEffect(() => {
         const url = `http://localhost:8888/capire_api/public/API/user/${auth.username}`;
-        console.log(url);
+
         const headers = {
             "Accept": "application/json",
             "Content-type": "application/json",
@@ -23,11 +24,7 @@ const Account = () => {
         })
         .then((response) => response.json())
         .then((response) => {
-            if(response === false) {
-
-            } else {
-                setUser_data(response);
-            }
+			setUser_data(response);
         })
         .catch((err) => {
             

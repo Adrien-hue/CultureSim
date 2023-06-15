@@ -6,31 +6,36 @@ import React from 'react';
 import './App.scss';
 
 import { Header, Footer, CountryDetails } from './components/molecules';
-import { CaseStory_Home, Home, Login, Register, Quiz, PageNotFound, Account } from './containers';
+import { CaseStory_Home, Home, Login, Register, Quiz, PageNotFound, Account, RequireAuth } from './containers';
+import { Layout } from './layouts';
 
 function App() {
 
    return (
-    <div className="App">
-      
-      <Header />
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        {/* public routes */}
+        <Route path='/' element={<Home />} />
+        <Route path='quiz/:country' element={<CaseStory_Home />} />
+        <Route path='login' element={<Login />} />
+        <Route path='register' element={<Register />} />
 
-			<main className='mv-3 ph-3'>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='quiz/:country' element={<CaseStory_Home />} />
+        {/* protected routes */}
+        {/* connected routes */}
+        <Route element={<RequireAuth allowedAccess="1" />}>
           <Route path='quiz/:country/:quiz' element={<Quiz />} />
-          <Route path='login' element={<Login />} />
-          <Route path='register' element={<Register />} />
           <Route path='my-account' element={<Account />} />
+        </Route>
+        
+        {/* administration routes */}
+        <Route element={<RequireAuth allowedAccess="2" />}>
           <Route path='admin/country/:country' element={<CountryDetails />} />
-          <Route path='*' element={<PageNotFound/>} />
-        </Routes>
-			</main>
+        </Route>
 
-      <Footer />
-
-    </div>
+        {/* catch all */}
+        <Route path='*' element={<PageNotFound/>} />  
+      </Route>
+    </Routes>
   );
 }
 

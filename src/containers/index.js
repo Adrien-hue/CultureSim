@@ -5,5 +5,6 @@ import { Login } from "./Login";
 import { Register } from "./Register";
 import { PageNotFound } from "./PageNotFound";
 import { Account } from "./Account";
+import { RequireAuth } from "./RequireAuth";
 
-export { CaseStory_Home, Home, Quiz, Login, Register, PageNotFound, Account };
+export { CaseStory_Home, Home, Quiz, Login, Register, PageNotFound, Account, RequireAuth };

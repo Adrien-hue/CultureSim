@@ -6,13 +6,11 @@ import { ImgSideText, Dropdown } from "../../atoms";
 import logo_capire from "../../../assets/CAPIRE_logo_transparant.png"
 import img_user from "../../../assets/user.png"
 
-import { useContext } from "react";
-import AuthContext from "../../../contexts/AuthProvider";
-
+import { useAuth } from "../../../hooks";
 
 const Header = () => {
 
-    const { auth } = useContext(AuthContext);
+    const { auth } = useAuth();
 
     const data_CountriesFlags = [
            
