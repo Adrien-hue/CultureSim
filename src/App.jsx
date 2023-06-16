@@ -5,11 +5,9 @@ import React from 'react';
 
 import './App.scss';
 
-import { CountryDetails } from './components/molecules';
+import { CountryDetails, Datatable } from './components/molecules';
 import { CaseStory_Home, Home, Login, Register, Quiz, PageNotFound, Account, RequireAuth } from './containers';
 import { Layout } from './layouts';
-
-import data_user from "./data_user.json";
 
 function App() {
 
@@ -30,8 +28,12 @@ function App() {
         </Route>
         
         {/* administration routes */}
-        <Route element={<RequireAuth allowedAccess="2" />}>
-          <Route path='admin/country/:country' element={<CountryDetails />} />
+        <Route path='/admin' element={<RequireAuth allowedAccess="2" />}>
+          <Route path='countries' element={<Datatable table="countries" />} />
+          <Route path='users' element={<Datatable table="users" />} />
+          <Route path='answers' element={<Datatable table="answers" />} />
+          <Route path='case_stories' element={<Datatable table="case_stories" />} />
+          <Route path='country/:country' element={<CountryDetails />} />
         </Route>
 
         {/* catch all */}
