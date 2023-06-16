@@ -1,0 +1,108 @@
+
+
+{
+    "columns": {
+        "id": {
+            "display": 0,
+            "name": "Id"
+        },
+        "name": {
+            "display": 1,
+            "name": "Nom"
+        },
+        "first_name": {
+            "display": 1,
+            "name": "Prénom"
+        },
+        "username": {
+            "display": 1,
+            "name": "Nom d'utilisateur"
+        },
+        "email": {
+            "display": 1,
+            "name": "Email"
+        },
+        "role": {
+            "display": 1,
+            "name": "Rôle"
+        },
+        "admin": {
+            "display": 1,
+            "name": "Admin"
+        }
+    },
+    "data": [
+        {
+            "id": 1,
+            "name": "HOUEE",
+            "first_name": "Adrien",
+            "username": "JoyTeaser",
+            "email": "adrien.houee@edu.esiee.fr",
+            "role": "student",
+            "admin": 1
+        },
+        {
+            "id": 2,
+            "name": "BOSNJAK",
+            "first_name": "Julien",
+            "username": "King Julian",
+            "email": "julien.bosnjak@edu.esiee.fr",
+            "role": "student",
+            "admin": 1
+        },
+        {
+            "id": 3,
+            "name": "BELINGA",
+            "first_name": "Nadine",
+            "username": "Bob",
+            "email": "nadine.belinga@edu.esiee.fr",
+            "role": "student",
+            "admin": 1
+        },
+        {
+            "id": 4,
+            "name": "FENG",
+            "first_name": "Heyu",
+            "username": "Wii Sport",
+            "email": "heyu.feng@edu.esiee.fr",
+            "role": "student",
+            "admin": 1
+        },
+        {
+            "id": 5,
+            "name": "EVE",
+            "first_name": "Helen",
+            "username": "Cheesecake",
+            "email": "helen.eve@edu.esiee.fr",
+            "role": "profesional",
+            "admin": 0
+        },
+        {
+            "id": 6,
+            "name": "EVE",
+            "first_name": "Helen",
+            "username": "Cheesecake",
+            "email": "helen.eve@edu.esiee.fr",
+            "role": "profesional",
+            "admin": 0
+        },
+        {
+            "id": 7,
+            "name": "EVE",
+            "first_name": "Helen",
+            "username": "Cheesecake",
+            "email": "helen.eve@edu.esiee.fr",
+            "role": "profesional",
+            "admin": 0
+        },
+        {
+            "id": 8,
+            "name": "EVE",
+            "first_name": "Helen",
+            "username": "Cheesecake",
+            "email": "helen.eve@edu.esiee.fr",
+            "role": "profesional",
+            "admin": 0
+        }
+    ]
+}

@@ -1,0 +1,63 @@
+@import "../../../styles/_variables.scss";
+
+.datatable {
+	border-spacing: 0;
+
+	width: auto;
+	height: auto;
+	border-radius: 8px;
+
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	overflow: hidden;
+
+	.datatable-thead {
+		.thead-row {
+			.thead-cell {
+				height: 100px;
+				padding: 10px;
+
+				background-color: $alto;
+
+				border-bottom: 2px solid #78788c;
+			}
+		}
+	}
+
+	.datatable-tbody {
+		text-align: left;
+
+		.tbody-row {
+			.tbody-cell {
+				vertical-align: middle;
+
+				padding: 20px;
+
+				border-bottom: 2px solid #78788c;
+			}
+
+			.tbody-action_cell {
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+				column-gap: 15px;
+
+				.button {
+					padding: 10px;
+					margin: 0;
+				}
+
+				.button.modify-button {
+					background-color: $success_color;
+
+					border-color: $success_color;
+				}
+
+				.button.delete-button {
+					background-color: $danger_color;
+
+					border-color: $danger_color;
+				}
+			}
+		}
+	}
+}

@@ -242,3 +242,20 @@ a.inline-link:link, a.inline-link:visited{
         }
     }
 }
+
+.button {
+	width: 100%;
+	padding: 20px;
+	margin: 25px 0;
+
+	background-color: $chateau_green;
+
+	border: 1px solid $chateau_green;
+	border-radius: 100px;
+
+	color: white;
+	text-align: center;
+	font-weight: bold;
+
+	cursor: pointer;
+}
