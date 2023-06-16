@@ -9,6 +9,8 @@ import { Header, Footer, CountryDetails } from './components/molecules';
 import { CaseStory_Home, Home, Login, Register, Quiz, PageNotFound, Account, RequireAuth } from './containers';
 import { Layout } from './layouts';
 
+import data_user from "./data_user.json";
+
 function App() {
 
    return (
