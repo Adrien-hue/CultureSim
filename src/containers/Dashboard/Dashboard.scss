@@ -1,0 +1,12 @@
+.stat-cards {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 769px) {
+    .stat-cards {
+        justify-content: flex-start;
+    }
+}

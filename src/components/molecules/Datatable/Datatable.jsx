@@ -1,6 +1,8 @@
 import "./Datatable.scss";
+
 import React from "react";
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 import logo_capire from "../../../assets/CAPIRE_logo_transparant.png";
 
@@ -9,6 +11,8 @@ function Datatable({ table, ...props }) {
 	const [ columns, setColumns ] = useState();
 	const [ records, setRecords ] = useState();
 	
+	const location = useLocation()
+
 	useEffect(() => {
         const url = `http://localhost:8888/capire_api/public/API/${table}`;
 
@@ -31,9 +35,7 @@ function Datatable({ table, ...props }) {
         .catch((err) => {
             
         });
-    }, [])
-
-	console.log(columns)
+    }, [location.pathname])
 
 	return (
 		<table className="datatable">
@@ -63,7 +65,7 @@ function Datatable({ table, ...props }) {
 					</thead>
 					<tbody className="datatable-tbody">
 						{records.map((record, index) => (
-							<tr className="tbody-row" key={record.index}>
+							<tr className="tbody-row" key={`${table}-${index}`}>
 								{Object.keys(columns).map((key) => {
 									if (columns[key].display) {
 										return (
