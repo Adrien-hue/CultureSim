@@ -1,0 +1,174 @@
+@import "../../styles/variables";
+
+#admin-layout {
+    display: flex;
+
+    background-color: $alto;
+
+    #admin-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        width: 300px;
+        height: 100vh;
+    
+        background-color: $flesh;
+    
+        .logo {
+            display: flex;
+            align-items: center;
+    
+            padding: 30px 0 0 5px;
+    
+            color: $dove_gray;
+            img {
+                width: 80px;
+            }
+        }
+    
+        .nav-links {
+            margin-top: 40px;
+    
+            a {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                flex-wrap: nowrap;
+
+                width: 100%;
+                padding: 10px 15px;
+
+                color: $dove_gray;
+                text-decoration: none;
+
+                transition: 0.3s ease;
+
+                img {
+                    width: 30px;
+                    margin-right: 15px;
+                }
+            }
+    
+            a:hover {
+                background-color: $gold_drop;
+                
+                color: white;
+                
+                cursor: pointer;
+            }
+        }
+    }
+    
+    #interface {
+        position: relative;
+
+        width: calc(100% - 300px);
+        margin-left: 300px;
+
+        .navigation {
+            position: fixed;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            
+            width: calc(100% - 300px);
+            padding: 15px 30px;
+            margin-bottom: 40px;
+
+            background-color: white;
+
+            border-bottom: 2px solid $dove_gray;
+
+            #menu-btn {
+                display: none;
+                
+                img {
+                    width: 24px;
+                }
+            }
+
+            .profile a {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                align-items: center;
+
+                img {
+                    width: 24px;
+                    height: 24px;
+                    margin-right: 4px;
+                }
+            }
+        }
+
+        .content {
+            margin-top: 70px;
+            padding: 30px 30px 0 30px;
+        }
+    }
+}
+
+@media (max-width: 769px) {
+    #admin-layout {
+
+        #admin-nav {
+            position: fixed;
+            left: -270px;
+
+            width: 270px;
+
+            transition: 0.3s ease;
+        }
+
+        #admin-nav.active {
+            left: 0;
+        }
+
+        #interface {
+            display: inline-block;
+
+            width: 100%;
+            margin-left: 0px;
+
+            transition: 0.3s ease;
+
+            .navigation {
+                width: 100%;
+
+                #menu-btn {
+                    display: initial;
+                }
+            }
+
+            .content {
+                width: 92%;
+                margin: 70px auto;
+                padding: 0;
+
+                overflow-x: auto;
+            }
+        }
+
+        #admin-nav.active~#interface {
+            width: calc(100% - 270px);
+            margin-left: 270px;
+
+            transition: 0.3s ease;
+        }
+    }
+}
+
+@media (max-width: 477px) {
+    #admin-layout {
+
+        #interface {
+
+            .navigation {
+                padding: 15px;
+            }
+        }
+    }
+}
