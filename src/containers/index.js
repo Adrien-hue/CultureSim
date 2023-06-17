@@ -8,5 +8,20 @@ import { PageDetailAnswer } from "./PageDetailAnswer";
 import { Account } from "./Account";
 import { RequireAuth } from "./RequireAuth";
 import { Dashboard } from "./Dashboard";
+import { AdminListing } from "./AdminListing";
+import { EditCountry } from "./EditCountry";
 
-export { CaseStory_Home, Home, Quiz, Login, Register, PageNotFound, PageDetailAnswer, Account, RequireAuth, Dashboard };
+export {
+	CaseStory_Home,
+	Home,
+	Quiz,
+	Login,
+	Register,
+	PageNotFound,
+	PageDetailAnswer,
+	Account,
+	RequireAuth,
+	Dashboard,
+	AdminListing,
+	EditCountry,
+};
