@@ -60,6 +60,11 @@ const Header = () => {
         </RouterLink>
 
         <nav className="header-nav">
+            {auth.user_access >=2
+                ? <RouterLink to={`admin`} className="nav-link">
+                    Admin
+                </RouterLink>
+                : null}
             {auth.hasOwnProperty('id_user')
                 ? <RouterLink to={`/my-account`} className="nav-link">
                     <img src={img_user} alt="Account image" className="link-img" />
