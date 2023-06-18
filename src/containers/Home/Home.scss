@@ -8,10 +8,10 @@
     width: 100%;
 }
 
-.carrousel {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 32px; 
+.countryCards{
+    display: grid;
+    place-items: center center ;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    padding: 20px;
+    gap: 40px;
 }
