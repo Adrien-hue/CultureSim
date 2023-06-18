@@ -29,7 +29,7 @@ const Home = () => {
 
         <h2 className="mv-2">Countries</h2>
 
-        <div className="carrousel mv-2">
+        <div className="countryCards mv-2">
             {arCaseStory_Home.map((el) => {
                 return <RouterLink to={`quiz/` + el.name} key={`cardLink_` + el.name}>
                     <CountryCard name={el.name} image={el.img} />
