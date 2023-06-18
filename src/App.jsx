@@ -4,7 +4,8 @@ import React from "react";
 
 import "./App.scss";
 
-import { CountryDetails, Datatable } from "./components/molecules";
+import { CountryDetails } from "./components/molecules";
+
 import {
 	CaseStory_Home,
 	Home,
@@ -14,7 +15,9 @@ import {
 	PageNotFound,
 	Account,
 	RequireAuth,
-	Dashboard
+	Dashboard,
+	AdminListing,
+	EditCountry
 } from "./containers";
 import { Layout, AdminLayout } from "./layouts";
 
@@ -45,13 +48,14 @@ function App() {
 					<Route path="" element={<Dashboard />} />
 					<Route
 						path="countries"
-						element={<Datatable table="countries" />}
+						element={<AdminListing title="Countries" table="country" />}
 					/>
-					<Route path="users" element={<Datatable table="users" />} />
-					<Route path="answers" element={<Datatable table="answers" />} />
+					<Route path="country/edit" element={<EditCountry />} />
+					<Route path="users" element={<AdminListing title="Users" table="user" />} />
+					<Route path="answers" element={<AdminListing title="Answers" table="answer" />} />
 					<Route
 						path="case_stories"
-						element={<Datatable table="case_stories" />}
+						element={<AdminListing title="Case stories" table="case_story" />}
 					/>
 					<Route path="country/:country" element={<CountryDetails />} />
 				</Route>

@@ -1,0 +1,21 @@
+.listing-container {
+
+    .listing-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        margin-bottom: 30px;
+
+        h3 {
+            font-size: 1.5em;
+        }
+
+        a.button {
+            width: fit-content;
+            padding: 20px 40px;
+
+            color: white;
+        }
+    }
+}
