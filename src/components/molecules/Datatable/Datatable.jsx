@@ -14,7 +14,7 @@ function Datatable({ table, ...props }) {
 	const location = useLocation()
 
 	useEffect(() => {
-        const url = `http://localhost:8888/capire_api/public/API/${table}`;
+        const url = `http://localhost:8888/capire_api/public/API/${table}/all`;
 
         const headers = {
             "Accept": "application/json",
@@ -68,11 +68,19 @@ function Datatable({ table, ...props }) {
 							<tr className="tbody-row" key={`${table}-${index}`}>
 								{Object.keys(columns).map((key) => {
 									if (columns[key].display) {
-										return (
-											<td className="tbody-cell" key={key}>
-												{record[key]}
-											</td>
-										);
+										if(columns[key].type === 'text'){
+											return (
+												<td className="tbody-cell" key={key}>
+													{record[key]}
+												</td>
+											);
+										} else if(columns[key].type === 'img') {
+											return (
+												<td className="tbody-cell" key={key}>
+													<img src={record[key]} alt="Dynamically loaded" />
+												</td>
+											);
+										}
 									}
 								})}
 

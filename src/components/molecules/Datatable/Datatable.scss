@@ -39,6 +39,11 @@
 				padding: 20px;
 
 				border-bottom: 2px solid $alto;
+
+				img {
+					width: 200px;
+					height: auto;
+				}
 			}
 
 			.datatable-loader {
