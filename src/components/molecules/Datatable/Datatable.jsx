@@ -52,10 +52,12 @@ function Datatable({ table, ...props }) {
         })
         .then((response) => response.json())
         .then((response) => {
-			setColumns(response.columns);
-			setRecords(response.data);
+			if(JSON.stringify(records) !== JSON.stringify(response.data)){
+				setColumns(response.columns);
+				setRecords(response.data);
 
-			setIsLoading(false);
+				setIsLoading(false);
+			}
         })
         .catch((err) => {
             
