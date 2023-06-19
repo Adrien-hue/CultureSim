@@ -1,33 +1,83 @@
-import "./EditCountry.scss";
+// import "./EditCountry.scss";s
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigate } from "react-router-dom";
 
 const EditCountry = () => {
+	const navigate = useNavigate();
+
+	const [informationContent, setInformationContent] = useState();
+	const [informationClass, _setInformationClass] = useState("form-information");
+
+	const setInformationClass = (customClass) => {
+		_setInformationClass(`form-information ${customClass}`);
+	};
+
 	const schema = yup.object().shape({
-		country: yup
+		name: yup
 			.string()
 			.required("Field void, please enter your country !"),
 		description: yup
 			.string()
 			.required("Field void, please enter your description !"),
-		photo: yup.string().required("Field void, please put your photo !"),
+		image: yup.mixed().required("Field void, please put your photo !"),
+		
 	});
 
 	const {
 		register,
+		setValue,
 		handleSubmit,
 		formState: { errors },
 	} = useForm({
 		resolver: yupResolver(schema),
 	});
 
-	const onSubmit = (data) => {};
+	const onSubmit = (data) => {
+		console.log(data.file);
 
-	const handleClick = () => {
-		// implementation details
+		const url = `http://localhost:8888/capire_api/public/API/country/new`;
+
+		const formData = new FormData();
+
+		formData.append('name_country', data.name);
+		formData.append('desc_country', data.description);
+		formData.append('image_country', data.image);
+
+		fetch(url, {
+			method: "POST",
+			// headers: headers,
+			body: formData,
+		})
+			.then((response) => response.json())
+			.then((response) => {
+				if(response.error === 1) {
+					setInformationContent(response.message);
+					setInformationClass("danger");
+				} else {
+					setInformationContent(response.message);
+					setInformationClass("success");
+
+					setTimeout(() => {
+						navigate('../countries', {replace: true});
+					}, 1500);
+				}
+			})
+			.catch((err) => {
+				if (!err?.response) {
+					setInformationContent("No server response");
+					setInformationClass("danger");
+				} else {
+					setInformationContent(
+						"An error occured! Please contact an admin."
+					);
+					setInformationClass("danger");
+				}
+			});
 	};
+
 
 	const [previewSrc, setPreviewSrc] = useState("");
 
@@ -40,94 +90,91 @@ const EditCountry = () => {
 				setPreviewSrc(reader.result);
 			};
 			reader.readAsDataURL(file);
+
+			setValue('image', file, { shouldValidate: true })
 		} else {
+			setValue('image', null, { shouldValidate: true })
 			setPreviewSrc("");
 		}
 	};
 
 	return (
-		<header>
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<div class="conss">
-					<div className="lmj-Edit_Country-title">
-						<h2>Add Country :</h2>
-					</div>
+		<form className="form" onSubmit={handleSubmit(onSubmit)}>
+			<h3 className="form-title">Country</h3>
 
-					<div className="lmj-Edit_Country-read">
-						<p>Country :</p>
+			<p className={informationClass}>{informationContent}</p>
+
+			<div className="form-input">
+				<label className="input-label">Name *</label>
+
+				<input
+					type="text"
+					name="name"
+					placeholder="Name"
+					className="input"
+					required
+					{...register("name")}
+				/>
+				{errors.name && (
+					<div className="form-error">
+						{errors.name.message}
 					</div>
-					<input
-						className="form-input"
-						type="text"
-						name="country"
-						placeholder="Country"
-						{...register("country")}
+				)}
+			</div>
+
+			<div className="form-input">
+				<label className="input-label">Description *</label>
+
+				<input
+					type="text"
+					name="description"
+					placeholder="Description"
+					className="input"
+					required
+					{...register("description")}
+				/>
+				{errors.description && (
+					<div className="form-error">
+						{errors.description.message}
+					</div>
+				)}
+			</div>
+
+			<div className="form-input">
+				<label className="input-label">Image *</label>
+
+				<input
+					type="file"
+					id="image"
+					name="image"
+					accept="image/*"
+					className="input"
+					onChange={(ev) => {handleFileChange(ev)}}
+					required
+				/>
+
+				{previewSrc && (
+					<img
+						src={previewSrc}
+						alt="Aperçu de la photo"
+						style={{
+							display: "block",
+							height: "100px",
+							width: "100px",
+						}}
 					/>
-					{errors.country && (
-						<div className="error-message">
-							{errors.country.message}
-						</div>
-					)}
-
-					<div className="lmj-Edit_Country-read">
-						<p>Description :</p>
+				)}
+				{errors.description && (
+					<div className="form-error">
+						{errors.description.message}
 					</div>
-					<textarea
-						className="form-input"
-						type="text"
-						name="description"
-						placeholder="Description"
-						{...register("description")}
-					/>
-					{errors.description && (
-						<div className="error-message">
-							{errors.description.message}
-						</div>
-					)}
+				)}
+			</div>
 
-					<br></br>
-					<br></br>
-
-					<div className="lmj-Edit_Country-read">
-						<p>Photo :</p>
-					</div>
-
-					<label for="photo" class="lmj-Edit_Country-photo">
-						<input
-							type="file"
-							id="photo"
-							name="photo"
-							accept="image/*"
-							onChange={handleFileChange}
-							required
-						/>
-
-						{previewSrc && (
-							<img
-								src={previewSrc}
-								alt="Aperçu de la photo"
-								style={{
-									display: "block",
-									height: "100px",
-									width: "100px",
-								}}
-							/>
-						)}
-					</label>
-
-					<div>
-						<button
-							className="lmj-Edit_Country-button"
-							type="submit"
-							id="submit"
-							onClick={handleClick}
-						>
-							Add country
-						</button>
-					</div>
-				</div>
-			</form>
-		</header>
+			<button type="submit" className="form-submit">
+				Save
+			</button>
+		</form>
 	);
 }
 export default EditCountry;
