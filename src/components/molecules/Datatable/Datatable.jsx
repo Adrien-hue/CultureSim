@@ -2,7 +2,7 @@ import "./Datatable.scss";
 
 import React from "react";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import logo_capire from "../../../assets/CAPIRE_logo_transparant.png";
 
@@ -12,6 +12,31 @@ function Datatable({ table, ...props }) {
 	const [ records, setRecords ] = useState();
 	
 	const location = useLocation()
+	const navigate = useNavigate();
+
+	const handleDeleteClick = (id) => {
+		const url = `http://localhost:8888/capire_api/public/API/${table}/delete`;
+
+		const data = {
+			[`id_${table}`]: id 
+		}
+
+		fetch(url, {
+            method: "POST",
+			body: JSON.stringify(data)
+        })
+        .then((response) => response.json())
+        .then((response) => {
+			alert(response.message);
+
+			if(response.error === 0) {
+				setRecords(records.filter((el) => el[`id_${table}`] !== id));
+			}
+		})
+		.catch((err) => {
+            
+        });
+	}
 
 	useEffect(() => {
         const url = `http://localhost:8888/capire_api/public/API/${table}/all`;
@@ -35,7 +60,7 @@ function Datatable({ table, ...props }) {
         .catch((err) => {
             
         });
-    }, [location.pathname])
+    }, [location.pathname, records])
 
 	return (
 		<table className="datatable">
@@ -90,7 +115,7 @@ function Datatable({ table, ...props }) {
 											Modifier
 										</button>
 
-										<button className="button delete-button">
+										<button className="button delete-button" type="button" onClick={() => handleDeleteClick(record[`id_${table}`])}>
 											Supprimer
 										</button>
 									</div>
