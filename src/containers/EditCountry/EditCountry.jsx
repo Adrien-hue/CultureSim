@@ -36,8 +36,6 @@ const EditCountry = () => {
 	});
 
 	const onSubmit = (data) => {
-		console.log(data.file);
-
 		const url = `http://localhost:8888/capire_api/public/API/country/new`;
 
 		const formData = new FormData();
