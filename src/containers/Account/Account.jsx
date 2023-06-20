@@ -29,7 +29,7 @@ const Account = () => {
         .catch((err) => {
             
         });
-    }, [])
+    })
 
 	return (
 		<div>
