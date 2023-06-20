@@ -19,6 +19,7 @@ import {
 	AdminListing,
 	EditCountry,
 	EditAnswer,
+	EditUser,
 } from "./containers";
 import { Layout, AdminLayout } from "./layouts";
 
@@ -59,6 +60,7 @@ function App() {
 					
 					{/* User routes */}
 					<Route path="users" element={<AdminListing title="Users" table="user" />} />
+					<Route path="user/edit" element={<EditUser />} />
 					
 					{/* Answer routes */}
 					<Route path="answers" element={<AdminListing title="Answers" table="answer" />} />

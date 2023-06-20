@@ -1,110 +1,242 @@
-import './EditUser.scss'
+import "./EditUser.scss";
+
 import React, { useState } from "react";
-import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from "react-router-dom";
 
-const EditUser=()=> {
-    const schema = yup.object().shape({
-        name_user: yup.string().required('Field void, please enter your context !'),
-        first_name_user: yup.string().required('Field void, please put your comment !'),
-        username_user: yup.string().required('Field void, please put your comment !'),
-        password_user: yup.string().min(8).required("Password has left blank!"),
-        mail_user: yup.string().email().required('Field void, please put your comment !'),
-        
-    })
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(schema),
-      });
-    
-      const onSubmit = (data) => {
-        
-      } 
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-      return (
+const EditUser = () => {
+	const navigate = useNavigate();
 
-        <header>
-        <form onSubmit={handleSubmit(onSubmit)}>
-         <div class="cont">
-          
-         <div className='lmj-Edit_User-title'>
-           <h2>Edit User :</h2>
-           </div>
+	const [informationContent, setInformationContent] = useState();
+	const [informationClass, _setInformationClass] = useState("form-information");
 
-           <div className='lmj-Edit_User-read'><p>Name user :</p></div>
-            <input className = "form-input"
-            type="text" 
-            name="name_user" 
-            placeholder='Name user'
-            { ...register("name_user")}
-      />
-            {errors.name_user && <div className="error-message">{errors.name_user.message}</div>}
+	const setInformationClass = (customClass) => {
+		_setInformationClass(`form-information ${customClass}`);
+	};
 
-            <div className='lmj-Edit_User-read'><p>First name user :</p></div>
-            <input className = "form-input"
-            type="text" 
-            name="first_name_user" 
-            placeholder='first name user'
-            { ...register("first_name_user")}
-      />
-            {errors.first_name_user && <div className="error-message">{errors.first_name_user.message}</div>}
+	const schema = yup.object().shape({
+		name_user: yup
+			.string()
+			.required("Field void, please enter your context !"),
+		first_name_user: yup
+			.string()
+			.required("Field void, please put your comment !"),
+		username_user: yup
+			.string()
+			.required("Field void, please put your comment !"),
+		password_user: yup.string().min(8).required("Password has left blank!"),
+		mail_user: yup
+			.string()
+			.email()
+			.required("Field void, please put your comment !"),
+		access_user: yup.string().required('Access has been left blank'),
+		role_user: yup.string().required('Role has been left blank'),
+	});
 
-            <div className='lmj-Edit_User-read'><p>Username user :</p></div>
-            <input className = "form-input"
-            type="text" 
-            name="username_user" 
-            placeholder='Username user'
-            { ...register("username_user")}
-      />
-            {errors.username_user && <div className="error-message">{errors.username_user.message}</div>}
+	const {
+		register,
+		handleSubmit,
+		setValue,
+		formState: { errors },
+	} = useForm({
+		resolver: yupResolver(schema),
+	});
 
-            <div className='lmj-Edit_User-read'><p>Password user :</p></div>
-            <input className = "form-input"
-            type="password" 
-            name="password_user" 
-            placeholder='Password user'
-            { ...register("password_user")}
-      />
-            {errors.password_user && <div className="error-message">{errors.password_user.message}</div>}
+	const onSubmit = (data) => {
+		let url = `http://localhost:8888/capire_api/public/API/user/new`;
 
-            <div className='lmj-Edit_User-read'><p>Access user:</p></div>
-                 <select className="form-select">
-                 <option value="0">User</option>
-                 <option value="1">Editor</option>
-                 <option value="2">Administrator</option>
-                 </select>
-             <br></br>
+		const formData = new FormData();
 
-            <div className='lmj-Edit_User-read'><p>Mail user :</p></div>
-            <input className = "form-input"
-            type="email" 
-            name="mail_user" 
-            placeholder='Mail user'
-            { ...register("mail_user")}
-      />
-            {errors.mail_user && <div className="error-message">{errors.mail_user.message}</div>}
+		formData.append('name_user', data.name_user);
+		formData.append('first_name_user', data.first_name_user);
+		formData.append('username_user', data.username_user);
+		formData.append('password_user', data.password_user);
+		formData.append('mail_user', data.mail_user);
+		formData.append('access_user', data.access_user);
+		formData.append('status_user', data.role_user);
 
-          
-            
-             <div className="lmj-Edit_User-read"><p>Status User :</p></div>
-		       
-             <select className="form-select" name="status_user" >
-                 <option value="0">Student</option>
-                 <option value="1">Teacher</option>
-                 <option value="2">Professional</option>
-                 <option value="3">Others</option>
-                 </select>
-		      
-		      
-            <br></br>
-            <button className="lmj-Edit_User-button"type="submit"  id= "submit">
-          Edit User
-        </button>
+		fetch(url, {
+			method: "POST",
+			body: formData,
+		})
+			.then((response) => response.json())
+			.then((response) => {
+				if(response.error === 1) {
+					setInformationContent(response.message);
+					setInformationClass("danger");
+				} else {
+					setInformationContent(response.message);
+					setInformationClass("success");
 
-           </div>
-          </form>
-        </header>
-  )
-}
+					setTimeout(() => {
+						navigate('../users', {replace: true});
+					}, 1500);
+				}
+			})
+			.catch((err) => {
+				if (!err?.response) {
+					setInformationContent("No server response");
+					setInformationClass("danger");
+				} else {
+					setInformationContent(
+						"An error occured! Please contact an admin."
+					);
+					setInformationClass("danger");
+				}
+			});
+	};
+
+	return (
+		<form className="form" onSubmit={handleSubmit(onSubmit)}>
+			<h3 className="form-title">User</h3>
+
+			<p className={informationClass}>{informationContent}</p>
+
+			<div className="form-input">
+                <div className="input-label">Last name *</div>
+
+                <input
+					type="text"
+					name="name_user"
+					placeholder="Last name"
+					className="input"
+					required
+					{...register("name_user")}
+				/>
+				{errors.name_user && (
+					<div className="form-error">
+						{errors.name_user.message}
+					</div>
+				)}
+            </div>
+
+			<div className="form-input">
+                <div className="input-label">First name *</div>
+
+                <input
+					type="text"
+					name="first_name_user"
+					placeholder="First name"
+					className="input"
+					required
+					{...register("first_name_user")}
+				/>
+				{errors.first_name_user && (
+					<div className="form-error">
+						{errors.first_name_user.message}
+					</div>
+				)}
+            </div>
+
+			<div className="form-input">
+                <div className="input-label">Username *</div>
+
+                <input
+					type="text"
+					name="username_user"
+					placeholder="Username"
+					className="input"
+					required
+					{...register("username_user")}
+				/>
+				{errors.username_user && (
+					<div className="form-error">
+						{errors.username_user.message}
+					</div>
+				)}
+            </div>
+
+			<div className="form-input">
+                <div className="input-label">Email *</div>
+
+                <input
+					type="email"
+					name="mail_user"
+					placeholder="Email"
+					className="input"
+					required
+					{...register("mail_user")}
+				/>
+				{errors.mail_user && (
+					<div className="form-error">
+						{errors.mail_user.message}
+					</div>
+				)}
+            </div>
+
+			<div className="form-input">
+                <div className="input-label">Password *</div>
+
+                <input
+					type="password"
+					name="password_user"
+					placeholder="Password"
+					className="input"
+					required
+					{...register("password_user")}
+				/>
+				{errors.password_user && (
+					<div className="form-error">
+						{errors.password_user.message}
+					</div>
+				)}
+            </div>
+
+			<div className="form-input">
+                <div className="input-label">Role *</div>
+
+                <select 
+                    name="role_user" 
+                    id="role_user" 
+                    className="input" 
+                    required 
+                    {...register("role_user")}
+                    onChange={(e) => setValue('role_user', e.target.value, { shouldValidate: true })} // Using setValue
+                >
+                    <option value="">Select an option</option>
+                    <option value="Student">Student</option>
+						<option value="Teacher">Teacher</option>
+						<option value="Professional">Professional</option>
+						<option value="Others">Others</option>
+                </select>
+				{errors.role_user && (
+					<div className="form-error">
+						{errors.role_user.message}
+					</div>
+				)}
+            </div>
+
+			<div className="form-input">
+                <div className="input-label">Access *</div>
+
+                <select 
+                    name="access_user" 
+                    id="access_user" 
+                    className="input" 
+                    required 
+                    {...register("access_user")}
+                    onChange={(e) => setValue('access_user', e.target.value, { shouldValidate: true })} // Using setValue
+                >
+                    <option value="">Select an option</option>
+                    <option value="0">User</option>
+					<option value="1">Editor</option>
+					<option value="2">Administrator</option>
+                </select>
+				{errors.access_user && (
+					<div className="form-error">
+						{errors.access_user.message}
+					</div>
+				)}
+            </div>
+
+			<button type="submit" className="form-submit">
+				Save
+			</button>
+		</form>
+	);
+};
 export default EditUser;
