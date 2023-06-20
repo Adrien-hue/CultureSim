@@ -1,13 +1,6 @@
-import { useParams } from 'react-router-dom';
-
 import './CountryDetails.scss'
-import countryData from '../../../data_CaseStory_Home.json'
 
 const CountryDetails = () => {
-
-  const params_country = useParams().country;
-
-  const data_country = countryData.find( el => el.name === params_country);
 
   let picture = "france.png";
   let name = "france";
@@ -40,7 +33,7 @@ const CountryDetails = () => {
           Country image :
         </div>
         <div className="details-img">
-          <img src={require (`../../../assets/` + picture)} alt={`${name} image`} />
+          <img src={require (`../../../assets/` + picture)} alt={`${name}`} />
         </div>
       </div>
     </div>
