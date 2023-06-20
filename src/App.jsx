@@ -46,18 +46,27 @@ function App() {
 			<Route element={<RequireAuth allowedAccess="2" />}>
 				<Route path="admin" element={<AdminLayout />}>
 					<Route path="" element={<Dashboard />} />
+					
+					{/* Country routes */}
 					<Route
 						path="countries"
 						element={<AdminListing title="Countries" table="country" />}
 					/>
 					<Route path="country/edit" element={<EditCountry />} />
+					<Route path="country/edit/:id_country" element={<EditCountry />} />
+					<Route path="country/:country" element={<CountryDetails />} />
+					
+					{/* User routes */}
 					<Route path="users" element={<AdminListing title="Users" table="user" />} />
+					
+					{/* Answer routes */}
 					<Route path="answers" element={<AdminListing title="Answers" table="answer" />} />
+					
+					{/* Case story routes */}
 					<Route
 						path="case_stories"
 						element={<AdminListing title="Case stories" table="case_story" />}
 					/>
-					<Route path="country/:country" element={<CountryDetails />} />
 				</Route>
 			</Route>
 		</Routes>

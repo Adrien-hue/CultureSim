@@ -1,12 +1,14 @@
 // import "./EditCountry.scss";s
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EditCountry = () => {
 	const navigate = useNavigate();
+
+	const params_country = useParams().id_country;
 
 	const [informationContent, setInformationContent] = useState();
 	const [informationClass, _setInformationClass] = useState("form-information");
@@ -15,16 +17,32 @@ const EditCountry = () => {
 		_setInformationClass(`form-information ${customClass}`);
 	};
 
-	const schema = yup.object().shape({
-		name: yup
-			.string()
-			.required("Field void, please enter your country !"),
-		description: yup
-			.string()
-			.required("Field void, please enter your description !"),
-		image: yup.mixed().required("Field void, please put your photo !"),
-		
-	});
+	let schema;
+	if(params_country !== undefined) {
+		schema = yup.object().shape({
+			name: yup
+				.string()
+				.required("Field void, please enter your country !"),
+			description: yup
+				.string()
+				.required("Field void, please enter your description !"),
+			image: yup.mixed().required("Field void, please put your photo !"),
+			id_country: yup.string().required(),
+			updated_image: yup.string().required()
+			
+		});
+	} else {
+		schema = yup.object().shape({
+			name: yup
+				.string()
+				.required("Field void, please enter your country !"),
+			description: yup
+				.string()
+				.required("Field void, please enter your description !"),
+			image: yup.mixed().required("Field void, please put your photo !"),
+			
+		});
+	}
 
 	const {
 		register,
@@ -36,7 +54,12 @@ const EditCountry = () => {
 	});
 
 	const onSubmit = (data) => {
-		const url = `http://localhost:8888/capire_api/public/API/country/new`;
+		let url;
+		if(params_country !== undefined){
+			url = `http://localhost:8888/capire_api/public/API/country/update/${data.id_country}`
+		} else {
+			url = `http://localhost:8888/capire_api/public/API/country/new`;
+		}
 
 		const formData = new FormData();
 
@@ -44,9 +67,12 @@ const EditCountry = () => {
 		formData.append('desc_country', data.description);
 		formData.append('image_country', data.image);
 
+		if(params_country !== undefined) {
+			formData.append('updated_image', data.updated_image);
+		}
+
 		fetch(url, {
 			method: "POST",
-			// headers: headers,
 			body: formData,
 		})
 			.then((response) => response.json())
@@ -82,6 +108,10 @@ const EditCountry = () => {
 	const handleFileChange = (event) => {
 		const file = event.target.files[0];
 
+		if(params_country !== undefined) {
+			setValue('updated_image', '1', { shouldValidate: true })
+		}
+
 		if (file) {
 			const reader = new FileReader();
 			reader.onload = () => {
@@ -96,11 +126,42 @@ const EditCountry = () => {
 		}
 	};
 
+	useEffect(() => {
+		if(params_country !== undefined) {
+			const url = `http://localhost:8888/capire_api/public/API/country/find/${params_country}`;
+
+			fetch(url, {
+				method: "GET",
+			})
+			.then((response) => response.json())
+			.then((response) => {
+				if(response.error === 1) {
+					setInformationContent(response.message);
+					setInformationClass("danger");
+				} else {
+					let image_name = response.country.image_country.split('/');
+					image_name = String(image_name.slice(-1));
+
+					setValue('name', response.country.name_country, { shouldValidate: true });
+					setValue('description', response.country.desc_country, { shouldValidate: true });
+					setValue('image', image_name, { shouldValidate: false });
+					setPreviewSrc(response.country.image_country);
+				}
+			})
+			.catch((err) => {
+				
+			});
+		}
+	}, [params_country])
+
 	return (
 		<form className="form" onSubmit={handleSubmit(onSubmit)}>
 			<h3 className="form-title">Country</h3>
 
 			<p className={informationClass}>{informationContent}</p>
+
+			{params_country !== undefined && <input type="hidden" name="id_country" value={params_country} {...register("id_country")} />}
+			{params_country !== undefined && <input type="hidden" name="updated_image" value="0" {...register("updated_image")} />}
 
 			<div className="form-input">
 				<label className="input-label">Name *</label>
@@ -148,7 +209,6 @@ const EditCountry = () => {
 					accept="image/*"
 					className="input"
 					onChange={(ev) => {handleFileChange(ev)}}
-					required
 				/>
 
 				{previewSrc && (

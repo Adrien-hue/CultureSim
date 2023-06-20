@@ -2,7 +2,7 @@ import "./Datatable.scss";
 
 import React from "react";
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 
 import logo_capire from "../../../assets/CAPIRE_logo_transparant.png";
 
@@ -113,9 +113,9 @@ function Datatable({ table, ...props }) {
 
 								<td className="tbody-cell">
 									<div className="tbody-action_cell">
-										<button className="button modify-button">
+										<Link to={`../${table}/edit/${record[`id_${table}`]}`} className="button modify-button">
 											Modifier
-										</button>
+										</Link>
 
 										<button className="button delete-button" type="button" onClick={() => handleDeleteClick(record[`id_${table}`])}>
 											Supprimer
