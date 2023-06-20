@@ -20,6 +20,7 @@ import {
 	EditCountry,
 	EditAnswer,
 	EditUser,
+	EditCaseStory,
 } from "./containers";
 import { Layout, AdminLayout } from "./layouts";
 
@@ -73,6 +74,8 @@ function App() {
 						path="case_stories"
 						element={<AdminListing title="Case stories" table="case_story" />}
 					/>
+					<Route path="case_story/edit" element={<EditCaseStory />} />
+					<Route path="case_story/edit/:id_case_story" element={<EditCaseStory />} />
 				</Route>
 			</Route>
 		</Routes>

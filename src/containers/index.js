@@ -12,6 +12,7 @@ import { AdminListing } from "./AdminListing";
 import { EditCountry } from "./EditCountry";
 import { EditAnswer } from "./EditAnswer";
 import { EditUser } from "./EditUser";
+import { EditCaseStory } from "./EditCaseStory";
 
 export {
 	CaseStoryHome,
@@ -27,5 +28,6 @@ export {
 	AdminListing,
 	EditCountry,
 	EditAnswer,
-	EditUser
+	EditUser,
+	EditCaseStory
 };
