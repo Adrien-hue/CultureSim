@@ -25,7 +25,7 @@ const CaseStory_Home = () => {
     const pictureSide = "left";
     let text = <div>
     
-    <h2 className="Title">Culture Simulator {name}: </h2>
+   
 
     <p>{data_country.text}</p> <br/>
     <p><strong>Number of cases :</strong> 20 per round</p><br/>
@@ -34,6 +34,7 @@ const CaseStory_Home = () => {
         
     </div>
     return <div className="CaseStoryHome-container">
+         <h2 className="Title">Culture Simulator {name}: </h2>
         <ImgSideText text={text} img={picture} img_side={pictureSide} key={'ImgSideText'+ id}/>
 
         
