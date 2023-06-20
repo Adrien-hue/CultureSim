@@ -6,7 +6,7 @@ import React from 'react';
 import './App.scss';
 
 import { Header, Footer, CountryDetails } from './components/molecules';
-import { CaseStory_Home, Home, Login, Register, Quiz, PageNotFound, Account, RequireAuth } from './containers';
+import { CaseStory_Home, Home, Login, Register, Quiz, PageNotFound, Account, RequireAuth, PageUnauth } from './containers';
 import { Layout } from './layouts';
 
 import data_user from "./data_user.json";
@@ -36,6 +36,9 @@ function App() {
 
         {/* catch all */}
         <Route path='*' element={<PageNotFound/>} />  
+
+        <Route path='admin' element={<PageUnauth />} />
+
       </Route>
     </Routes>
   );

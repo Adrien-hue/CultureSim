@@ -11,7 +11,9 @@ function PageNotFound(){
     return(
         <div className='PageNotFound-container'>
             <h1>404</h1>
-            <img src={image404} alt="image404" />
+            <div className='image404'>
+                <img src={image404} alt="image404" />
+            </div>
             <h2>Oops! Page Not Found</h2>
             <p>This page doesn't exist or was removed!<br/>
             We suggest you back to home.</p>

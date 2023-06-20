@@ -15,7 +15,7 @@
     }
 
     h2{
-        font-family: 'Capriola', sans-serif;
+        font-family: 'Maven Pro', sans-serif;
         color: gray;
         font-weight: 600;
     }
@@ -27,9 +27,26 @@
         color: rgb(64, 64, 64);
     }
 
-    img{
+    .image404 img{
         margin-top: -220px;
         margin-bottom: -75px;
+    }
+
+    .image401 img{
+        margin-top: -220px;
+        margin-bottom: -180px;
+        width: 700px;
+        height: 700px;
+    }
+
+    .btn{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        .back{
+            margin-right: 30px;
+        }
     }
 
     button{
@@ -42,7 +59,7 @@
         z-index: 1;
         overflow: hidden;
         span{
-            font-family: 'Capriola', sans-serif;
+            font-family: 'Maven Pro', sans-serif;
             color: white;
             font-size: larger;   
         }
