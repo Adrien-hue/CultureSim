@@ -152,7 +152,7 @@ const EditCountry = () => {
 				
 			});
 		}
-	}, [params_country])
+	})
 
 	return (
 		<form className="form" onSubmit={handleSubmit(onSubmit)}>
@@ -214,7 +214,7 @@ const EditCountry = () => {
 				{previewSrc && (
 					<img
 						src={previewSrc}
-						alt="Aperçu de la photo"
+						alt="Preview"
 						style={{
 							display: "block",
 							height: "100px",
