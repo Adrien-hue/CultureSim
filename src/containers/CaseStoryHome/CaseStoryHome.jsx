@@ -1,6 +1,6 @@
 
 
-import "./CaseStory_Home.scss";
+import "./CaseStoryHome.scss";
 
 import { ImgSideText } from "../../components/atoms"; 
 import { useParams } from "react-router-dom";
@@ -13,7 +13,7 @@ import arCaseStory_Home from "../../data_CaseStory_Home.json";
 
 
 
-const CaseStory_Home = () => {
+const CaseStoryHome = () => {
 
     let params_country_name = useParams().country;
     
@@ -41,4 +41,4 @@ const CaseStory_Home = () => {
 
 }
 
-export default CaseStory_Home;
+export default CaseStoryHome;

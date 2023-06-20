@@ -1,4 +1,4 @@
-import { CaseStory_Home } from "./CaseStory_Home";
+import { CaseStoryHome } from "./CaseStoryHome";
 import { Home } from "./Home";
 import { Quiz } from "./Quiz";
 import { Login } from "./Login";
@@ -12,7 +12,7 @@ import { AdminListing } from "./AdminListing";
 import { EditCountry } from "./EditCountry";
 
 export {
-	CaseStory_Home,
+	CaseStoryHome,
 	Home,
 	Quiz,
 	Login,

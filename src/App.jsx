@@ -7,7 +7,7 @@ import "./App.scss";
 import { CountryDetails } from "./components/molecules";
 
 import {
-	CaseStory_Home,
+	CaseStoryHome,
 	Home,
 	Login,
 	Register,
@@ -27,7 +27,7 @@ function App() {
 			<Route path="/" element={<Layout />}>
 				{/* public routes */}
 				<Route path="/" element={<Home />} />
-				<Route path="quiz/:country" element={<CaseStory_Home />} />
+				<Route path="quiz/:country" element={<CaseStoryHome />} />
 				<Route path="login" element={<Login />} />
 				<Route path="register" element={<Register />} />
 
