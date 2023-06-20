@@ -17,7 +17,8 @@ import {
 	RequireAuth,
 	Dashboard,
 	AdminListing,
-	EditCountry
+	EditCountry,
+	EditAnswer,
 } from "./containers";
 import { Layout, AdminLayout } from "./layouts";
 
@@ -61,6 +62,7 @@ function App() {
 					
 					{/* Answer routes */}
 					<Route path="answers" element={<AdminListing title="Answers" table="answer" />} />
+					<Route path="answer/edit" element={<EditAnswer />} />
 					
 					{/* Case story routes */}
 					<Route

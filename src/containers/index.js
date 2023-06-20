@@ -10,6 +10,7 @@ import { RequireAuth } from "./RequireAuth";
 import { Dashboard } from "./Dashboard";
 import { AdminListing } from "./AdminListing";
 import { EditCountry } from "./EditCountry";
+import { EditAnswer } from "./EditAnswer";
 
 export {
 	CaseStoryHome,
@@ -24,4 +25,5 @@ export {
 	Dashboard,
 	AdminListing,
 	EditCountry,
+	EditAnswer,
 };
