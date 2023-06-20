@@ -1,7 +1,7 @@
 import "./EditUser.scss";
 
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 import { useForm } from "react-hook-form";
@@ -11,6 +11,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 const EditUser = () => {
 	const navigate = useNavigate();
 
+	const params_user = useParams().id_user;
+
 	const [informationContent, setInformationContent] = useState();
 	const [informationClass, _setInformationClass] = useState("form-information");
 
@@ -18,24 +20,47 @@ const EditUser = () => {
 		_setInformationClass(`form-information ${customClass}`);
 	};
 
-	const schema = yup.object().shape({
-		name_user: yup
-			.string()
-			.required("Field void, please enter your context !"),
-		first_name_user: yup
-			.string()
-			.required("Field void, please put your comment !"),
-		username_user: yup
-			.string()
-			.required("Field void, please put your comment !"),
-		password_user: yup.string().min(8).required("Password has left blank!"),
-		mail_user: yup
-			.string()
-			.email()
-			.required("Field void, please put your comment !"),
-		access_user: yup.string().required('Access has been left blank'),
-		role_user: yup.string().required('Role has been left blank'),
-	});
+	let schema;
+	if(params_user !== undefined) {
+		schema = yup.object().shape({
+			id_user: yup.string().required(),
+			name_user: yup
+				.string()
+				.required("Field void, please enter your context !"),
+			first_name_user: yup
+				.string()
+				.required("Field void, please put your comment !"),
+			username_user: yup
+				.string()
+				.required("Field void, please put your comment !"),
+			password_user: yup.string().min(8).required("Password has left blank!"),
+			mail_user: yup
+				.string()
+				.email()
+				.required("Field void, please put your comment !"),
+			access_user: yup.string().required('Access has been left blank'),
+			role_user: yup.string().required('Role has been left blank'),
+		});
+	} else {
+		schema = yup.object().shape({
+			name_user: yup
+				.string()
+				.required("Field void, please enter your context !"),
+			first_name_user: yup
+				.string()
+				.required("Field void, please put your comment !"),
+			username_user: yup
+				.string()
+				.required("Field void, please put your comment !"),
+			password_user: yup.string().min(8).required("Password has left blank!"),
+			mail_user: yup
+				.string()
+				.email()
+				.required("Field void, please put your comment !"),
+			access_user: yup.string().required('Access has been left blank'),
+			role_user: yup.string().required('Role has been left blank'),
+		});
+	}
 
 	const {
 		register,
@@ -47,7 +72,13 @@ const EditUser = () => {
 	});
 
 	const onSubmit = (data) => {
-		let url = `http://localhost:8888/capire_api/public/API/user/new`;
+		let url;
+
+		if(params_user !== undefined) {
+			url = `http://localhost:8888/capire_api/public/API/user/update/${data.id_user}`;
+		} else {
+			url = `http://localhost:8888/capire_api/public/API/user/new`;
+		}
 
 		const formData = new FormData();
 
@@ -90,11 +121,41 @@ const EditUser = () => {
 			});
 	};
 
+	useEffect(() => {
+		if(params_user !== undefined) {
+			const url = `http://localhost:8888/capire_api/public/API/user/find/${params_user}`;
+
+			fetch(url, {
+				method: "GET",
+			})
+			.then((response) => response.json())
+			.then((response) => {
+				if(response.error === 1) {
+					setInformationContent(response.message);
+					setInformationClass("danger");
+				} else {
+					setValue('name_user', response.user.name_user, { shouldValidate: true });
+					setValue('first_name_user', response.user.first_name_user, { shouldValidate: true });
+					setValue('username_user', response.user.username_user, { shouldValidate: true });
+					setValue('password_user', response.user.password_user, { shouldValidate: true });
+					setValue('mail_user', response.user.mail_user, { shouldValidate: true });
+					setValue('access_user', response.user.access_user, { shouldValidate: true });
+					setValue('role_user', response.user.status_user, { shouldValidate: true });
+				}
+			})
+			.catch((err) => {
+				
+			});
+		}
+	}, [params_user, setValue]);
+
 	return (
 		<form className="form" onSubmit={handleSubmit(onSubmit)}>
 			<h3 className="form-title">User</h3>
 
 			<p className={informationClass}>{informationContent}</p>
+
+			{params_user !== undefined && <input type="hidden" name="id_user" value={params_user} {...register('id_user')}/>}
 
 			<div className="form-input">
                 <div className="input-label">Last name *</div>

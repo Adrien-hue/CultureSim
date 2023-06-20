@@ -11,7 +11,7 @@ const Account = () => {
     const [user_data, setUser_data] = useState([]);
 
     useEffect(() => {
-        const url = `http://localhost:8888/capire_api/public/API/user/find/${auth.username}`;
+        const url = `http://localhost:8888/capire_api/public/API/user/find/${auth.id_user}`;
 
         const headers = {
             "Accept": "application/json",
@@ -24,7 +24,7 @@ const Account = () => {
         })
         .then((response) => response.json())
         .then((response) => {
-			setUser_data(response);
+			setUser_data(response.user);
         })
         .catch((err) => {
             

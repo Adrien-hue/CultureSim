@@ -61,6 +61,7 @@ function App() {
 					{/* User routes */}
 					<Route path="users" element={<AdminListing title="Users" table="user" />} />
 					<Route path="user/edit" element={<EditUser />} />
+					<Route path="user/edit/:id_user" element={<EditUser />} />
 					
 					{/* Answer routes */}
 					<Route path="answers" element={<AdminListing title="Answers" table="answer" />} />
