@@ -11,6 +11,7 @@ import { Dashboard } from "./Dashboard";
 import { AdminListing } from "./AdminListing";
 import { EditCountry } from "./EditCountry";
 import { EditAnswer } from "./EditAnswer";
+import { EditUser } from "./EditUser";
 
 export {
 	CaseStoryHome,
@@ -26,4 +27,5 @@ export {
 	AdminListing,
 	EditCountry,
 	EditAnswer,
+	EditUser
 };
