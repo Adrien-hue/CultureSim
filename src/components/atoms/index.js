@@ -4,5 +4,6 @@ import { PTitle } from "./PTitle";
 import { ImgSideText } from "./ImgSideText";
 import { Dropdown } from "./Dropdown";
 import { StatCard } from "./StatCard";
+import { Switch } from "./Switch";
 
-export {CountryCard, PShadow, PTitle, ImgSideText, Dropdown, StatCard};
+export {CountryCard, PShadow, PTitle, ImgSideText, Dropdown, StatCard, Switch};
