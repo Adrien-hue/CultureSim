@@ -47,7 +47,7 @@ const AdminLayout = () => {
 
                     <div className="profile">
                         <Link to={`/my-account`}>
-                            <img src={user_logo} alt="Account image" />
+                            <img src={user_logo} alt="Account" />
                             Account
                         </Link>
                     </div>
