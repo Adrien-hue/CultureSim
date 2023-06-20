@@ -2,7 +2,7 @@ import "./Datatable.scss";
 
 import React from "react";
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import logo_capire from "../../../assets/CAPIRE_logo_transparant.png";
 
@@ -10,9 +10,6 @@ function Datatable({ table, ...props }) {
 	const [ isLoading, setIsLoading ] = useState(true);
 	const [ columns, setColumns ] = useState();
 	const [ records, setRecords ] = useState();
-	
-	const location = useLocation()
-	const navigate = useNavigate();
 
 	const handleDeleteClick = (id) => {
 		const url = `http://localhost:8888/capire_api/public/API/${table}/delete`;
@@ -62,7 +59,7 @@ function Datatable({ table, ...props }) {
         .catch((err) => {
             
         });
-    }, [location.pathname, records])
+    }, [table, records])
 
 	return (
 		<table className="datatable">
@@ -85,6 +82,8 @@ function Datatable({ table, ...props }) {
 											{columns[key].name}
 										</th>
 									);
+								} else {
+									return null;
 								}
 							})}
 							<th className="thead-cell"> Action </th>
@@ -107,7 +106,11 @@ function Datatable({ table, ...props }) {
 													<img src={record[key]} alt="Dynamically loaded" />
 												</td>
 											);
+										} else {
+											return null;
 										}
+									} else {
+										return null;
 									}
 								})}
 
