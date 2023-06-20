@@ -1,7 +1,7 @@
 import "./EditAnswer.scss";
 
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -10,6 +10,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Switch } from "../../components/atoms";
 
 const EditAnswer = () => {
+	const navigate = useNavigate();
+
+	const params_answer = useParams().id_answer;
 
     const [informationContent, setInformationContent] = useState();
 	const [informationClass, _setInformationClass] = useState("form-information");
@@ -17,17 +20,26 @@ const EditAnswer = () => {
     const [case_storyOpt, setCase_storyOpt] = useState([]);
     const [answerTrue, setAnswerTrue] = useState(false);
 
-    const navigate = useNavigate();
-
 	const setInformationClass = (customClass) => {
 		_setInformationClass(`form-information ${customClass}`);
 	};
 
-	let schema = yup.object().shape({
-        sel_case_story: yup.string().required('Situation has been left blank'),
-		answer: yup.string().required("Answer has been left blank!"),
-		comment: yup.string().required("Comment has been left blank!"),
-	});
+	let schema;
+
+	if(params_answer !== undefined) {
+		schema = yup.object().shape({
+			id_answer: yup.string().required(),
+			sel_case_story: yup.string().required('Situation has been left blank'),
+			answer: yup.string().required("Answer has been left blank!"),
+			comment: yup.string().required("Comment has been left blank!"),
+		});
+	} else {
+		schema = yup.object().shape({
+			sel_case_story: yup.string().required('Situation has been left blank'),
+			answer: yup.string().required("Answer has been left blank!"),
+			comment: yup.string().required("Comment has been left blank!"),
+		});
+	}
 
 	const {
 		register,
@@ -37,7 +49,12 @@ const EditAnswer = () => {
 	} = useForm({ resolver: yupResolver(schema) });
 
     const onSubmit = (data) => {
-        let url = `http://localhost:8888/capire_api/public/API/answer/new`;
+		let url;
+		if(params_answer !== undefined) {
+			url = `http://localhost:8888/capire_api/public/API/answer/update/${data.id_answer}`;
+		} else {
+			url = `http://localhost:8888/capire_api/public/API/answer/new`;
+		}
 
         const formData = new FormData();
 
@@ -45,10 +62,6 @@ const EditAnswer = () => {
         formData.append('interpretation_answer', data.answer);
         formData.append('is_true_answer', (answerTrue) ? 1 : 0);
         formData.append('comment_answer', data.comment);
-
-        for(var pair of formData.entries()) {
-            console.log(pair[0]+ ', '+ pair[1]);
-        }
 
         fetch(url, {
 			method: "POST",
@@ -90,13 +103,38 @@ const EditAnswer = () => {
             setCase_storyOpt(response.data);
         })
         .catch((err) => {});
-    }, [])
+
+		if(params_answer !== undefined) {
+			const url = `http://localhost:8888/capire_api/public/API/answer/find/${params_answer}`;
+
+			fetch(url, {
+				method: "GET",
+			})
+			.then((response) => response.json())
+			.then((response) => {
+				if(response.error === 1) {
+					setInformationContent(response.message);
+					setInformationClass("danger");
+				} else {
+					setValue('answer', response.answer.interpretation_answer, { shouldValidate: true });
+					setValue('comment', response.answer.comment_answer, { shouldValidate: true });
+					setAnswerTrue((response.answer.is_true_answer === "1") ? true : false);
+					setValue('sel_case_story', response.answer.id_case_story, { shouldValidate: true });
+				}
+			})
+			.catch((err) => {
+				
+			});
+		}
+    }, [params_answer, setValue]);
 
 	return (
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
             <h3 className="form-title">Answer</h3>
 
             <p className={informationClass}>{informationContent}</p>
+
+			{params_answer !== undefined && <input type="hidden" name="id_answer" value={params_answer} {...register('id_answer')}/>}
 
             <div className="form-input">
                 <div className="input-label">Situation *</div>

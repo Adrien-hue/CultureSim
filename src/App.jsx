@@ -63,6 +63,7 @@ function App() {
 					{/* Answer routes */}
 					<Route path="answers" element={<AdminListing title="Answers" table="answer" />} />
 					<Route path="answer/edit" element={<EditAnswer />} />
+					<Route path="answer/edit/:id_answer" element={<EditAnswer />} />
 					
 					{/* Case story routes */}
 					<Route
