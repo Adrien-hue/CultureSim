@@ -152,7 +152,7 @@ const EditCountry = () => {
 				
 			});
 		}
-	})
+	}, [params_country, setValue]);
 
 	return (
 		<form className="form" onSubmit={handleSubmit(onSubmit)}>
