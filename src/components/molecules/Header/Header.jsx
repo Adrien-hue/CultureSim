@@ -43,7 +43,9 @@ const Header = () => {
     ]
 
     const arCompCountryFlags = data_CountriesFlags.map((item) => {
-        return <ImgSideText text={item.code} img={item.flag} img_side='left'/>
+        return <ImgSideText img={item.flag} img_side='left'>
+            <div>{item.code}</div>
+        </ImgSideText>
     })
 
     return <header className="app-header">

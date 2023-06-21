@@ -47,7 +47,9 @@ const Home = () => {
     }, []);
 
     return <div>
-        <ImgSideText text={home_text} img="home_tmp.jpg" img_side="left"/>
+        <ImgSideText img="home_tmp.jpg" img_side="left">
+            <p>{home_text}</p>
+        </ImgSideText>
 
         <img src={banner_home} alt="banner_home" className="banner mv-3" />
 

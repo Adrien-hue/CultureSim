@@ -1,6 +1,6 @@
 import "./ImgSideText.scss";
 
-const ImgSideText = ({text, img, img_side, ...props}) => {
+const ImgSideText = ({children, img, img_side, ...props}) => {
     let img_className = `imgSideText-img`;
     let p_className = `imgSideText-p`;
 
@@ -25,7 +25,7 @@ const ImgSideText = ({text, img, img_side, ...props}) => {
 
         <img src={img_src} alt="Side illustration" className={img_className} />
 
-        <div className={p_className}>{text}</div>
+        <div className={p_className}>{children}</div>
     </div>
 }
 

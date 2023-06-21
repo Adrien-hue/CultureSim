@@ -39,10 +39,11 @@ const CaseStoryHome = () => {
     }, [params_id_country])
 
     return <div className="CaseStoryHome-container">
-
-        <h2 className="Title">Culture Simulator {nameCountry}: </h2>
         
-        <ImgSideText text={descCountry} img={imageCountry} img_side={pictureSide} key={'ImgSideText'+ params_id_country}/>
+        <ImgSideText text={descCountry} img={imageCountry} img_side={pictureSide} key={'ImgSideText'+ params_id_country}>
+            <h2 className="title">Culture Simulator {nameCountry}: </h2>
+            <p>{descCountry}</p>
+        </ImgSideText>
         
     </div>
     
