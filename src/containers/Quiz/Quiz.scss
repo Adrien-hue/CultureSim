@@ -2,6 +2,10 @@
 .tabs {
 
     .tabs-nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+
         overflow: hidden;
     
         border: 1px solid $gold_drop;
