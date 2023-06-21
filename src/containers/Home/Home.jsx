@@ -6,9 +6,13 @@ import { Link as RouterLink } from "react-router-dom";
 
 import banner_home from "../../assets/banner_tmp.jpg";
 import arCaseStory_Home from "../../data_CaseStory_Home.json";
+import { useEffect, useState } from "react";
 
 const Home = () => {
-    const home_text = <div>
+    const [countriesData, setCountriesData] = useState([]);
+
+    const home_text = (
+    <div>
         <p>
             The CAPIRE project aims at exchanging knowledge between the partners and jointly developing an innovative method: building a digital intercultual training tool that is called a Culture Simulator. This tool challenges students, business people and private persons with realistic intercultural workplace situations which they have to solve. It provides them with explanations and further cultural background information.<br />
             Summarising, this project and the tool that will be created will help Europeans to better understand cultural differences.
@@ -21,6 +25,26 @@ const Home = () => {
         </p>
 
     </div>
+    );
+    
+    useEffect(() => {
+        const url = `http://localhost:8888/capire_api/public/API/country/findLast/5`;
+
+        fetch(url, {
+            method: "GET",
+        })
+        .then((response) => response.json())
+        .then((response) => {
+            if(response.error === 1) {
+                
+            } else {
+                setCountriesData(response.data);
+            }
+        })
+        .catch((err) => {
+            
+        });
+    }, []);
 
     return <div>
         <ImgSideText text={home_text} img="home_tmp.jpg" img_side="left"/>
@@ -30,9 +54,9 @@ const Home = () => {
         <h2 className="mv-2">Countries</h2>
 
         <div className="countryCards mv-2">
-            {arCaseStory_Home.map((el) => {
-                return <RouterLink to={`quiz/` + el.name} key={`cardLink_` + el.name}>
-                    <CountryCard name={el.name} image={el.img} />
+            {countriesData.map((country) => {
+                return <RouterLink to={`quiz/` + country.name_country} key={`cardLink_` + country.name_country}>
+                    <CountryCard name={country.name_country} image={country.image_country} />
                 </RouterLink>
             })}
         </div>
