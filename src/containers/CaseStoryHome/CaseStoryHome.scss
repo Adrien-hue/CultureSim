@@ -1,43 +1,19 @@
 @import "/src/styles/variables";
 
 .CaseStoryHome-container{
-    .Title{
-        color:rgb(58, 133, 5);
+    .title{
+        margin: 20px 0;
 
-        font-size: 45px;
-        text-align: left;
-        text-decoration: underline;
-
-        margin-bottom: 10px;
-        margin-left: 10px;
-    }
-
-    .Buttons{
-
-        display: flex;
-        flex-direction: row;
-       
-      
-        font-size: 18px;
+        font-size: 2em;
         text-align: left;
 
-        margin-bottom: 100px;
-        .button1{
-
-            background-color: $gold_drop;
-            margin-left: 160px;
-
-            width: 200px;
-            height: 30px;
-
-            text-align: center;
-
-            box-shadow: 3px 3px 5px rgb(26, 32, 13)
-        }
-
-
-
     }
-    
+
+    .external_link {
+        display: block;
+
+        width: fit-content;
+        margin: 20px 0;
+    }
 }
 

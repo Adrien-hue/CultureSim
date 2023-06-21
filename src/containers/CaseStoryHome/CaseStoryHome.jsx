@@ -3,7 +3,7 @@
 import "./CaseStoryHome.scss";
 
 import { ImgSideText } from "../../components/atoms"; 
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
@@ -42,7 +42,10 @@ const CaseStoryHome = () => {
         
         <ImgSideText text={descCountry} img={imageCountry} img_side={pictureSide} key={'ImgSideText'+ params_id_country}>
             <h2 className="title">Culture Simulator {nameCountry}: </h2>
+            
             <p>{descCountry}</p>
+
+            <Link to="1" className="external_link">Start new game</Link>
         </ImgSideText>
         
     </div>
