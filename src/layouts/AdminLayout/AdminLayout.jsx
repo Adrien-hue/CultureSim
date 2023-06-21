@@ -6,6 +6,7 @@ import user_logo from "../../assets/user.png";
 import country_logo from "../../assets/europe.png";
 import case_story_logo from "../../assets/question.png";
 import answer_logo from "../../assets/answer.png";
+import quiz_logo from "../../assets/quiz.png";
 import home_logo from "../../assets/home.png";
 import menu_logo from "../../assets/menu.png";
 
@@ -33,6 +34,7 @@ const AdminLayout = () => {
                     <Link to="countries"><img src={country_logo} alt="Countries" />Countries</Link>
                     <Link to="case_stories"><img src={case_story_logo} alt="Case stories" />Case stories</Link>
                     <Link to="answers"><img src={answer_logo} alt="Answers" />Answers</Link>
+                    <Link to="quiz"><img src={quiz_logo} alt="Answers" />Quiz</Link>
                     <Link to="/"><img src={home_logo} alt="Home" />Back to Home</Link>
                 </div>
             </nav>

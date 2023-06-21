@@ -51,10 +51,7 @@ function App() {
 					<Route path="" element={<Dashboard />} />
 					
 					{/* Country routes */}
-					<Route
-						path="countries"
-						element={<AdminListing title="Countries" table="country" />}
-					/>
+					<Route path="countries" element={<AdminListing title="Countries" table="country" />} />
 					<Route path="country/edit" element={<EditCountry />} />
 					<Route path="country/edit/:id_country" element={<EditCountry />} />
 					<Route path="country/:country" element={<CountryDetails />} />
@@ -70,12 +67,12 @@ function App() {
 					<Route path="answer/edit/:id_answer" element={<EditAnswer />} />
 					
 					{/* Case story routes */}
-					<Route
-						path="case_stories"
-						element={<AdminListing title="Case stories" table="case_story" />}
-					/>
+					<Route path="case_stories" element={<AdminListing title="Case stories" table="case_story" />} />
 					<Route path="case_story/edit" element={<EditCaseStory />} />
 					<Route path="case_story/edit/:id_case_story" element={<EditCaseStory />} />
+
+					{/* Quiz routes */}
+					<Route path="quiz" element={<AdminListing title="Quiz" table="quiz" />} />
 				</Route>
 			</Route>
 		</Routes>

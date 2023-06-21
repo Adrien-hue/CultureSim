@@ -94,7 +94,7 @@ function Datatable({ table, ...props }) {
 							<tr className="tbody-row" key={`${table}-${index}`}>
 								{Object.keys(columns).map((key) => {
 									if (columns[key].display) {
-										if(columns[key].type === 'text' || columns[key].type === 'bool'){
+										if(columns[key].type === 'text' || columns[key].type === 'bool' || columns[key].type === 'id'){
 											return (
 												<td className="tbody-cell" key={key}>
 													{record[key]}
