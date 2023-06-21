@@ -5,7 +5,7 @@ import { Link as RouterLink } from "react-router-dom";
 
 
 import banner_home from "../../assets/banner_tmp.jpg";
-import arCaseStory_Home from "../../data_CaseStory_Home.json";
+
 import { useEffect, useState } from "react";
 
 const Home = () => {
