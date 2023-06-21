@@ -5,37 +5,45 @@ import "./CaseStoryHome.scss";
 import { ImgSideText } from "../../components/atoms"; 
 import { useParams } from "react-router-dom";
 
-import arCaseStory_Home from "../../data_CaseStory_Home.json";
-
-       const StartGame = () => {
-        alert("you want to start the game");
-    }
-
-
+import { useEffect, useState } from "react";
 
 const CaseStoryHome = () => {
 
-    let params_country_name = useParams().country;
-    
-    let data_country = arCaseStory_Home.find( el => el.name === params_country_name);
+    const [nameCountry, setNameCountry] = useState("");
+    const [descCountry, setDescCountry] = useState("");
+    const [imageCountry, setImageCountry] = useState("");
 
-    let id = data_country.id;
-    let picture = data_country.img;
-    let name = data_country.name;
-    let text = data_country.text;
+    const params_id_country = useParams().id_country;
     
     const pictureSide = "left";
 
+    useEffect(() => {
+        const url = `http://localhost:8888/capire_api/public/API/country/findBy/name/${params_id_country}`;
+
+        fetch(url, {
+            method: "GET",
+        })
+        .then((response) => response.json())
+        .then((response) => {
+            if(response.error === 1) {
+                
+            } else {
+                setNameCountry(response.country.name_country)
+                setDescCountry(response.country.desc_country)
+                setImageCountry(response.country.image_country)
+            }
+        })
+        .catch((err) => {
+            
+        });
+    }, [params_id_country])
+
     return <div className="CaseStoryHome-container">
 
-        <h2 className="Title">Culture Simulator {name}: </h2>
+        <h2 className="Title">Culture Simulator {nameCountry}: </h2>
         
-        <ImgSideText text={text} img={picture} img_side={pictureSide} key={'ImgSideText'+ id}/>
+        <ImgSideText text={descCountry} img={imageCountry} img_side={pictureSide} key={'ImgSideText'+ params_id_country}/>
         
-        <div className="Buttons">
-            <button onClick={StartGame} className="button1">Start the game</button>
-             
-        </div> 
     </div>
     
 

@@ -3,7 +3,16 @@ import "./ImgSideText.scss";
 const ImgSideText = ({text, img, img_side, ...props}) => {
     let img_className = `imgSideText-img`;
     let p_className = `imgSideText-p`;
-    
+
+    let img_src = require(`../../../assets/CAPIRE_logo_transparant.png`);
+    if(img !== undefined && img !== ""){
+        if(img.includes('http')) {
+            img_src = img
+        } else {
+            img_src = require(`../../../assets/${img}`)
+        }
+    }
+
     if(img_side === 'left'){
         img_className += ` left-element`;
         p_className += ` right-element`;
@@ -13,11 +22,8 @@ const ImgSideText = ({text, img, img_side, ...props}) => {
     }
 
     return <div className="imgSideText-container">
-        <img 
-            src={require(`../../../assets/` + img)}
-            alt="Here is the alt" 
-            className={img_className}
-        />
+
+        <img src={img_src} alt="Side illustration" className={img_className} />
 
         <div className={p_className}>{text}</div>
     </div>

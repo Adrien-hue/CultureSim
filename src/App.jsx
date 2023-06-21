@@ -30,7 +30,7 @@ function App() {
 			<Route path="/" element={<Layout />}>
 				{/* public routes */}
 				<Route path="/" element={<Home />} />
-				<Route path="quiz/:country" element={<CaseStoryHome />} />
+				<Route path="quiz/:id_country" element={<CaseStoryHome />} />
 				<Route path="login" element={<Login />} />
 				<Route path="register" element={<Register />} />
 
